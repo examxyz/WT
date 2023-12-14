@@ -1,0 +1,188 @@
+
+ Assignment 1 
+
+1. Create a database with the name ‘Movie’.  
+2. A ‘Film’ is a collection of documents with the following fields:  
+	a. Film Id 
+	b. Title of the film 
+	c. Year of release 
+	d. Genre / Category (like adventure, action, sci-fi, romantic etc.) A film can belong to      	more than one genre.
+	e.  Actors (First name and Last name) A film can have more than one actor.  
+	f. Director (First name and Last name)  A film can have more than one director.
+   	g. Release details (It consists of places of release, dates of release and rating of the film.)
+ 
+3. An ‘Actor’ is a collection of documents with the following fields:  
+	a. Actor Id
+	b. First name 
+	c. Last Name  
+	d. Address (Street, City, State, Country, Pin-code) 
+	e. Contact Details (Email Id and Phone No)  
+	f. Age of an actor. 
+
+*****************************************************************************
+Queries:
+
+1. Insert at least 10 documents in the collection Film – 
+ 
+-->
+db.film.insert({"movieId":"101","name":"Dilwale","year":"2000","catagary":["bollywood","drama","emotional"], "Actor":[["Sharukh","khan"],["kajal","Devgan"]], "Director":[["Raj","Shegar"],["Sachin","Bhange"]], "release":[{"Place":"Mumbai","Date":"26/7/2019","rating":"4.4"},{"Place":"Pune","Date":"24/7/2019","rating":"5"}]})
+WriteResult({ "nInserted" : 1 })
+>
+> db.film.insert({"movieId":"102","name":"Bordere","year":"2000","catagary":["bollywood","Nation","Action"], "Actor":[["Sunny","Devol"],["Sunil","Shetty"]], "Director":["Amitabh","Bachan"], "release":[{"Place":"Mumbai","Date":"26/7/2000","rating":"5.4"}]})
+WriteResult({ "nInserted" : 1 })
+>
+
+> db.film.insert({"movieId":"103","name":"Action Jaction","year":"2000","catagary":["bollywood","Action"], "Actor":["Sohel","Khan"], "Director":["Govardhan","Shinde"], "release":[{"Place":"Mumbai","Date":"26/7/2000","rating":"5.4"}]})
+WriteResult({ "nInserted" : 1 })
+> >db.film.insert({"movieId":"104","name":"Judwa","year":"2002","catagary":["bollywood","Action","Commedy"], "Actor":["Salman","Khan"], "Director":["Salman","Khan"], "release":[{"Place":"Pune","Date":"25/6/2002","rating":"5"}]})
+WriteResult({ "nInserted" : 1 })
+>
+>db.film.insert({"movieId":"105","name":"Shahoo","year":"2019","catagary":["bollywood","Action","Tollywood"], "Actor":["Prabhas","Raju"], "Director":["Sandip","Reddy"], "release":[{"Place":"Pune","Date":"25/8/2019","rating":"7"}]})
+WriteResult({ "nInserted" : 1 })
+>
+> db.film.insert({"movieId":"106","name":"Kabir Singh","year":"2019","catagary":["bollywood","Action","Romantig"], "Actor":["Shahid","Kapur"], "Director":["Sandip","Reddy"], "release":[{"Place":"Delhi","Date":"15/8/2019","rating":"6"}]})
+WriteResult({ "nInserted" : 1 })
+>
+> db.film.insert({"movieId":"107","name":"Dream Girl","year":"2019","catagary":["bollywood","Comedy"], "Actor":["Ayushman","Khurana"], "Director":["Sandip",""], "release":[{"Place":"Benglor","Date":"1/9/2019","rating":"4"}]})
+WriteResult({ "nInserted" : 1 })
+> >db.film.insert({"movieId":"108","name":"Ready","year":"2015","catagary":["bollywood","Comedy"], "Actor":["Salman","Khan"], "Director":["Sandip","singh"], "release":[{"Place":"Mumbai","Date":"5/6/2019","rating":"10"}]})
+WriteResult({ "nInserted" : 1 })
+>
+> db.film.insert({"movieId":"109","name":"Super 30","year":"2019","catagary":["bollywood","Educational"], "Actor":["Rutik","Roshan"], "Director":["Yash","Raj"], "release":[{"Place":"Mumbai","Date":"5/5/2019","rating":"10"}]})
+WriteResult({ "nInserted" : 1 })
+>
+> db.film.insert({"movieId":"110","name":"flying Jatt","year":"2019","catagary":["bollywood"], "Actor":["Tiger","Sharof"], "Director":["Remo","Desoza"], "release":[{"Place":"Mumbai","Date":"5/5/2018","rating":"7"}]})
+WriteResult({ "nInserted" : 1 })
+>
+>
+>
+
+*****************************************************************************
+2. Insert at least 10 documents in the collection Actor. 
+-->
+
+db.actor.insert({"actorid":"201","Fname":"Salman","Lname":"Khan","Addr":[{"Straet":"Mumabai","City":"Mumbai","State":"Maharashtra","Contry":"India","Pincode":"413210"}],"Contact":[{"Email":"salman@gmail.com","Phno":"9999999999"}],"Age":"49"})
+WriteResult({ "nInserted" : 1 })
+> db.actor.insert({"actorid":"202","Fname":"Shaharukh","Lname":"Khan","Addr":[{"Straet":"Mumbai","City":"Mumbai","State":"Maharashtra","Contry":"India","Pincode":"413211"}],"Contact":[{"Email":"shaharukh@gmail.com","Phno":"88888888888"}],"Age":"35"})
+WriteResult({ "nInserted" : 1 })
+
+> db.actor.insert({"actorid":"203","Fname":"Rutik","Lname":"Roshan","Addr":[{"Straet":"Delhi","City":"Delhi","State":"Maharashtra","Contry":"India","Pincode":"413212"}],"Contact":[{"Email":"rutik@gmail.com","Phno":"8989898989"}],"Age":"30"})
+WriteResult({ "nInserted" : 1 })
+
+> db.actor.insert({"actorid":"204","Fname":"Varun","Lname":"Davan","Addr":[{"Straet":"Pune","City":"Pune","State":"Maharashtra","Contry":"India","Pincode":"413213"}],"Contact":[{"Email":"varun@gmail.com","Phno":"8585858585"}],"Age":"35"})
+WriteResult({ "nInserted" : 1 })
+
+> db.actor.insert({"actorid":"205","Fname":"Aliya","Lname":"Bhatt","Addr":[{"Straet":"Gujrat","City":"Gujrat","State":"Maharashtra","Contry":"India","Pincode":"413214"}],"Contact":[{"Email":"aliya@gmail.com","Phno":"9090900900"}],"Age":"25"})
+WriteResult({ "nInserted" : 1 })
+
+> db.actor.insert({"actorid":"206","Fname":"Madhuri","Lname":"Dixit","Addr":[{"Straet":"Gova","City":"Goa","State":"Goa","Contry":"India","Pincode":"413215"}],"Contact":[{"Email":"madhuri@gmail.com","Phno":"9087675665"}],"Age":"33"})
+WriteResult({ "nInserted" : 1 })
+
+> db.actor.insert({"actorid":"207","Fname":"Tapasi","Lname":"Pannu","Addr":[{"Straet":"Madhumiya","City":"Madhumiya","State":"Karnataka","Contry":"India","Pincode":"413216"}],"Contact":[{"Email":"tapasi@gmail.com","Phno":"9087675232"}],"Age":"28"})
+WriteResult({ "nInserted" : 1 })
+>db.actor.insert({"actorid":"208","Fname":"Amitabh","Lname":"Bachan","Addr":[{"Straet":"New Mumbai","City":"Mumbai","State":"Maharashtra","Contry":"India","Pincode":"413016"}],"Contact":[{"Email":"amitabh@gmail.com","Phno":"7777777777"}],"Age":"58"})
+WriteResult({ "nInserted" : 1 })
+> db.actor.insert({"actorid":"209","Fname":"Sunny","Lname":"Deol","Addr":[{"Straet":"Ludhiyana","City":"Ludhiyana","State":"Panjab","Contry":"India","Pincode":"413017"}],"Contact":[{"Email":"sunny@gmail.com","Phno":"7979797979"}],"Age":"48"})
+WriteResult({ "nInserted" : 1 })
+> db.actor.insert({"actorid":"210","Fname":"ajajy","Lname":"Deogan","Addr":[{"Straet":"Nagar","City":"Nagar","State":"Maharashtra","Contry":"India","Pincode":"413017"}],"Contact":[{"Email":"ajay@gmail.com","Phno":"7979793535"}],"Age":"47"})
+WriteResult({ "nInserted" : 1 })
+>
+
+*****************************************************************************
+3. Display all the documents inserted in both the collections.  
+-->
+> db.film.find()
+{ "_id" : ObjectId("5d8a3d39e5145a4386ecea8a"), "movieId" : "101", "name" : "Dilwale", "year" : "2000", "catagary" : [ "bollywood", "drama", "emotional" ], "Actor" : [ [ "Sharukh", "khan" ], [ "kajal", "Devgan" ] ], "Director" : [ [ "Raj", "Shegar" ], [ "Sachin", "Bhange" ] ], "release" : [ { "Place" : "Mumbai", "Date" : "26/7/2019", "rating" : "4.4" }, { "Place" : "Pune", "Date" : "24/7/2019", "rating" : "5" } ] }
+{ "_id" : ObjectId("5d8a3e5fe5145a4386ecea8b"), "movieId" : "102", "name" : "Bordere", "year" : "2000", "catagary" : [ "bollywood", "Nation", "Action" ], "Actor" : [ [ "Sunny", "Devol" ], [ "Sunil", "Shetty" ] ], "Director" : [ "Amitabh", "Bachan" ], "release" : [ { "Place" : "Mumbai", "Date" : "26/7/2000", "rating" : "5.4" } ] }
+{ "_id" : ObjectId("5d8a3ee1e5145a4386ecea8c"), "movieId" : "103", "name" : "Action Jaction", "year" : "2000", "catagary" : [ "bollywood", "Action" ], "Actor" : [ "Sohel", "Khan" ], "Director" : [ "Govardhan", "Shinde" ], "release" : [ { "Place" : "Mumbai", "Date" : "26/7/2000", "rating" : "5.4" } ] }
+{ "_id" : ObjectId("5d8a3f6ae5145a4386ecea8d"), "movieId" : "104", "name" : "Judwa", "year" : "2002", "catagary" : [ "bollywood", "Action", "Commedy" ], "Actor" : [ "Salman", "Khan" ], "Director" : [ "Salman", "Khan" ], "release" : [ { "Place" : "Pune", "Date" : "25/6/2002", "rating" : "5" } ] }
+{ "_id" : ObjectId("5d8a4068e5145a4386ecea8e"), "movieId" : "105", "name" : "Shahoo", "year" : "2019", "catagary" : [ "bollywood", "Action", "Tollywood" ], "Actor" : [ "Prabhas", "Raju" ], "Director" : [ "Sandip", "Reddy" ], "release" : [ { "Place" : "Pune", "Date" : "25/8/2019", "rating" : "7" } ] }
+
+{ "_id" : ObjectId("5d8a4130e5145a4386ecea8f"), "movieId" : "106", "name" : "Kabir Singh", "year" : "2019", "catagary" : [ "bollywood", "Action", "Romantig" ], "Actor" : [ "Shahid", "Kapur" ], "Director" : [ "Sandip", "Reddy" ], "release" : [ { "Place" : "Delhi", "Date" : "15/8/2019", "rating" : "6" } ] }
+{ "_id" : ObjectId("5d8a4208e5145a4386ecea90"), "movieId" : "107", "name" : "Dream Girl", "year" : "2019", "catagary" : [ "bollywood", "Comedy" ], "Actor" : [ "Ayushman", "Khurana" ], "Director" : [ "Sandip", "" ], "release" : [ { "Place" : "Benglor", "Date" : "1/9/2019", "rating" : "4" } ] }
+{ "_id" : ObjectId("5d8a4288e5145a4386ecea91"), "movieId" : "108", "name" : "Ready", "year" : "2015", "catagary" : [ "bollywood", "Comedy" ], "Actor" : [ "Salman", "Khan" ], "Director" : [ "Sandip", "singh" ], "release" : [ { "Place" : "Mumbai", "Date" : "5/6/2019", "rating" : "10" } ] }
+{ "_id" : ObjectId("5d8a4348e5145a4386ecea92"), "movieId" : "109", "name" : "Super 30", "year" : "2019", "catagary" : [ "bollywood", "Educational" ], "Actor" : [ "Rutik", "Roshan" ], "Director" : [ "Yash", "Raj" ], "release" : [ { "Place" : "Mumbai", "Date" : "5/5/2019", "rating" : "10" } ] }
+{ "_id" : ObjectId("5d8a43a9e5145a4386ecea93"), "movieId" : "110", "name" : "flying Jatt", "year" : "2019", "catagary" : [ "bollywood" ], "Actor" : [ "Tiger", "Sharof" ], "Director" : [ "Remo", "Desoza" ], "release" : [ { "Place" : "Mumbai", "Date" : "5/5/2018", "rating" : "7" } ] }
+>
+
+
+
+> db.actor.find()
+{ "_id" : ObjectId("5d8a456de5145a4386ecea94"), "actorid" : "201", "Fname" : "Salman", "Lname" : "Khan", "Addr" : [ { "Straet" : "Mumabai", "City" : "Mumbai", "State" : "Maharashtra", "Contry" : "India", "Pincode" : "413210" } ], "Contact" : [ { "Email" : "salman@gmail.com", "Phno" : "9999999999" } ], "Age" : "49" }
+{ "_id" : ObjectId("5d8a45a8e5145a4386ecea95"), "actorid" : "202", "Fname" : "Shaharukh", "Lname" : "Khan", "Addr" : [ { "Straet" : "Mumbai", "City" : "Mumbai", "State" : "Maharashtra", "Contry" : "India", "Pincode" : "413211" } ], "Contact" : [ { "Email" : "shaharukh@gmail.com", "Phno" : "88888888888" } ], "Age" : "35" }
+{ "_id" : ObjectId("5d8a4621e5145a4386ecea96"), "actorid" : "203", "Fname" : "Rutik", "Lname" : "Roshan", "Addr" : [ { "Straet" : "Delhi", "City" : "Delhi", "State" : "Maharashtra", "Contry" : "India", "Pincode" : "413212" } ], "Contact" : [ { "Email" : "rutik@gmail.com", "Phno" : "8989898989" } ], "Age" : "30" }
+{ "_id" : ObjectId("5d8a4659e5145a4386ecea97"), "actorid" : "204", "Fname" : "Varun", "Lname" : "Davan", "Addr" : [ { "Straet" : "Pune", "City" : "Pune", "State" : "Maharashtra", "Contry" : "India", "Pincode" : "413213" } ], "Contact" : [ { "Email" : "varun@gmail.com", "Phno" : "8585858585" } ], "Age" : "35" }
+{ "_id" : ObjectId("5d8a46a1e5145a4386ecea98"), "actorid" : "205", "Fname" : "Aliya", "Lname" : "Bhatt", "Addr" : [ { "Straet" : "Gujrat", "City" : "Gujrat", "State" : "Maharashtra", "Contry" : "India", "Pincode" : "413214" } ], "Contact" : [ { "Email" : "aliya@gmail.com", "Phno" : "9090900900" } ], "Age" : "25" }
+{ "_id" : ObjectId("5d8a4703e5145a4386ecea99"), "actorid" : "206", "Fname" : "Madhuri", "Lname" : "Dixit", "Addr" : [ { "Straet" : "Gova", "City" : "Goa", "State" : "Goa", "Contry" : "India", "Pincode" : "413215" } ], "Contact" : [ { "Email" : "madhuri@gmail.com", "Phno" : "9087675665" } ], "Age" : "33" }
+{ "_id" : ObjectId("5d8a4764e5145a4386ecea9a"), "actorid" : "207", "Fname" : "Tapasi", "Lname" : "Pannu", "Addr" : [ { "Straet" : "Madhumiya", "City" : "Madhumiya", "State" : "Karnataka", "Contry" : "India", "Pincode" : "413216" } ], "Contact" : [ { "Email" : "tapasi@gmail.com", "Phno" : "9087675232" } ], "Age" : "28" }
+{ "_id" : ObjectId("5d8a4812e5145a4386ecea9b"), "actorid" : "208", "Fname" : "Amitabh", "Lname" : "Bachan", "Addr" : [ { "Straet" : "New Mumbai", "City" : "Mumbai", "State" : "Maharashtra", "Contry" : "India", "Pincode" : "413016" } ], "Contact" : [ { "Email" : "amitabh@gmail.com", "Phno" : "7777777777" } ], "Age" : "58" }
+{ "_id" : ObjectId("5d8a4882e5145a4386ecea9c"), "actorid" : "209", "Fname" : "Sunny", "Lname" : "Deol", "Addr" : [ { "Straet" : "Ludhiyana", "City" : "Ludhiyana", "State" : "Panjab", "Contry" : "India", "Pincode" : "413017" } ], "Contact" : [ { "Email" : "sunny@gmail.com", "Phno" : "7979797979" } ], "Age" : "48" }
+{ "_id" : ObjectId("5d8a48c7e5145a4386ecea9d"), "actorid" : "210", "Fname" : "ajajy", "Lname" : "Deogan", "Addr" : [ { "Straet" : "Nagar", "City" : "Nagar", "State" : "Maharashtra", "Contry" : "India", "Pincode" : "413017" } ], "Contact" : [ { "Email" : "ajay@gmail.com", "Phno" : "7979793535" } ], "Age" : "47" }
+>
+
+*****************************************************************************
+4. Add a value to the rating of the film whose title starts with ‘S’. 
+-->
+> db.film.update({"name":/^S/},{$set:{"rating":"9"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+>
+> db.film.find({"name":/^S/})
+{ "_id" : ObjectId("5d8a4068e5145a4386ecea8e"), "movieId" : "105", "name" : "Shahoo", "year" : "2019", "catagary" : [ "bollywood", "Action", "Tollywood" ], "Actor" : [ "Prabhas", "Raju" ], "Director" : [ "Sandip", "Reddy" ], "release" : [ { "Place" : "Pune", "Date" : "25/8/2019", "rating" : "7" } ], "rating" : "9" }
+{ "_id" : ObjectId("5d8a4348e5145a4386ecea92"), "movieId" : "109", "name" : "Super 30", "year" : "2019", "catagary" : [ "bollywood", "Educational" ], "Actor" : [ "Rutik", "Roshan" ], "Director" : [ "Yash", "Raj" ], "release" : [ { "Place" : "Mumbai", "Date" : "5/5/2019", "rating" : "10" } ], "rating" : "8" }
+>
+
+*****************************************************************************
+
+
+
+5. Add an actor named "Tutik Roshan" in the ‘Actor’ collection. Also add the details of the film in ‘Film’ collection in which this actor has acted in. 
+-->
+>db.actor.insert({"actorid":"203","Fname":"Rutik","Lname":"Roshan","Addr":[{"Straet":"Delhi","City":"Delhi","State":"Maharashtra","Contry":"India","Pincode":"413212"}],"Contact":[{"Email":"rutik@gmail.com","Phno":"8989898989"}],"Age":"30"})
+>db.film.insert({"movieId":"109","name":"Super 30","year":"2019","catagary":["bollywood","Educational"], "Actor":["Rutik","Roshan"], "Director":["Yash","Raj"], "release":[{"Place":"Mumbai","Date":"5/5/2019","rating":"10"}]})
+
+
+*****************************************************************************
+6. Delete the film "Super 30". 
+-->
+ db.film.remove({"name":"Super 30"})
+WriteResult({ "nRemoved" : 1 })
+
+*****************************************************************************
+7. Delete an actor named "Varun".
+-->
+db.actor.remove({"Fname":"Varun"})
+WriteResult({ "nRemoved" : 1 })
+
+*****************************************************************************
+8. Delete all actors from an ‘Actor’ collection who have age greater than “30”.
+-->
+db.actor.remove({"Age":{$gt:"30"}})
+WriteResult({ "nRemoved" : 5 }) 
+
+> db.actor.find()
+{ "_id" : ObjectId("5d8a4621e5145a4386ecea96"), "actorid" : "203", "Fname" : "Rutik", "Lname" : "Roshan", "Addr" : [ { "Straet" : "Delhi", "City" : "Delhi", "State" : "Maharashtra", "Contry" : "India", "Pincode" : "413212" } ], "Contact" : [ { "Email" : "rutik@gmail.com", "Phno" : "8989898989" } ], "Age" : "30" }
+{ "_id" : ObjectId("5d8a46a1e5145a4386ecea98"), "actorid" : "205", "Fname" : "Aliya", "Lname" : "Bhatt", "Addr" : [ { "Straet" : "Gujrat", "City" : "Gujrat", "State" : "Maharashtra", "Contry" : "India", "Pincode" : "413214" } ], "Contact" : [ { "Email" : "aliya@gmail.com", "Phno" : "9090900900" } ], "Age" : "25" }
+{ "_id" : ObjectId("5d8a4764e5145a4386ecea9a"), "actorid" : "207", "Fname" : "Tapasi", "Lname" : "Pannu", "Addr" : [ { "Straet" : "Madhumiya", "City" : "Madhumiya", "State" : "Karnataka", "Contry" : "India", "Pincode" : "413216" } ], "Contact" : [ { "Email" : "tapasi@gmail.com", "Phno" : "9087675232" } ], "Age" : "28" }
+>
+
+*****************************************************************************
+9. Update the actor’s address where Actor Id is “205”.
+-->
+> db.actor.update({"actorid":"205"},{$set:{"Addr":[{"Straet":"Delhi","City":"Dilhi","state":"Maharashtra","Contry":"India","Pincode":"412020"}]}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+>
+>
+> db.actor.find({"actorid":"205"})
+{ "_id" : ObjectId("5d8a46a1e5145a4386ecea98"), "actorid" : "205", "Fname" : "Aliya", "Lname" : "Bhatt", "Addr" : [ { "Straet" : "Delhi", "City" : "Dilhi", "state" : "Maharashtra", "Contry" : "India", "Pincode" : "412020" } ], "Contact" : [ { "Email" : "aliya@gmail.com", "Phno" : "9090900900" } ], "Age" : "25" }
+>
+
+*****************************************************************************
+10. Update the genre/catagary of the film directed by “Remo Desoza”. 
+-->
+ db.film.update({"Director":["Remo","Desoza"]},{$set:{"catagary":["hollywood","Cool"]}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+>
+
+> db.film.find({"Director":["Remo","Desoza"]})
+{ "_id" : ObjectId("5d8a43a9e5145a4386ecea93"), "movieId" : "110", "name" : "flying Jatt", "year" : "2019", "catagary" : [ "hollywood", "Cool" ], "Actor" : [ "Tiger", "Sharof" ], "Director" : [ "Remo", "Desoza" ], "release" : [ { "Place" : "Mumbai", "Date" : "5/5/2018", "rating" : "7" } ] }
+>
