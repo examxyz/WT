@@ -1,0 +1,3517 @@
+Slip 1 
+Q1.
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Management</title>
+    <link rel="stylesheet" href="project.css">
+
+</head>
+<body>
+    <h2>Project Management</h2>
+    <table cellpadding="10" cellspacing="2" align="center">
+        <th class="row1">Project Name</th>
+        <tr>
+            <td class="col1">Project Name</td>
+            <td class="col2"><input type="text" name="project name" id="PName" placeholder="project name"></td>
+        </tr>
+        <th class="row1">Assigned to</th>
+        <tr>
+            <td class="col1">Assigned to</td>
+            <td class="col2">
+                <select name="person" id="projectAssigned">
+                    <option value="Er Merry Petision">Er Merry Petision</option>
+                    <option value="Er Deepak Bhusan">Er Deepak Bhusan</option>
+                    <option value="Er Robert Watson">Er Robert Watson</option>
+                </select>
+            </td>
+        </tr>
+
+        <th class="row1">Start Date</th>
+        <tr>
+            <td class="col1">Start Date</td>
+            <td class="col2"><input type="date" name="Start Date" id="SDate" class="startDate"></td>
+        </tr>
+        <th class="row1">End Date</th>
+        <tr>
+            <td class="col1">End Date</td>
+            <td class="col2"><input type="date" name="End date" id="EDate" class="endDate"></td>
+        </tr>
+
+        <th class="row1">Priority</th>
+        <tr>
+            <td class="col1">Priority</td>
+            <td class="col2">
+                <input type="radio" name="priority" id="high" value="High"> High
+                <input type="radio" name="priority" id="average" value="Average"> Average
+                <input type="radio" name="priority" id="low" value="Low"> Low
+            </td>
+        </tr>
+        <th class="row1">Description</th>
+        <tr>
+            <td class="col1">Description</td>
+            <td class="col2"><textarea name="description" id="description" cols="35" rows="4"></textarea></td>
+        </tr>
+        <tr colspan="2" align="center">
+            <td>
+                <button type="submit" class="submit1"  onclick="submitProjectDetails()">Submit</button>
+            </td>
+            <td>
+                <button type="reset" class="reset1" onclick="resetProjectDetails()">Clear</button>
+            </td>
+        </tr>
+        <tr colspan="1" align="center">
+            <td>
+                <button type="reset" class="reset2" onclick="resetProjectDetails()">Clear</button>
+            </td>
+        </tr>
+    </table>
+    <script src="project.js"></script>
+</body>
+
+</html>
+Q.2
+**Property Collection:
+{
+  "_id": ObjectId("property_id"),
+  "area": "Area_Name",
+  "rate": 120000,
+  "owner_id": ObjectId("owner_id")
+}
+**Owner Collection:
+{
+  "_id": ObjectId("owner_id"),
+  "name": "Mr.Patil",
+  "properties": [
+    ObjectId("property_id_1"),
+    ObjectId("property_id_2"),
+    ObjectId("property_id_3"),
+    ObjectId("property_id_4"),
+    ObjectId("property_id_5")
+  ]
+}
+** Property Collection:
+{
+  "_id": ObjectId("1"),
+  "area": "Nashik",
+  "rate": 95000,
+  "owner_id": ObjectId("101")
+}
+
+{
+  "_id": ObjectId("2"),
+  "area": "Mumbai",
+  "rate": 150000,
+  "owner_id": ObjectId("102")
+}
+
+{
+  "_id": ObjectId("3"),
+  "area": "Pune",
+  "rate": 80000,
+  "owner_id": ObjectId("103")
+}
+
+{
+  "_id": ObjectId("4"),
+  "area": "Nashik",
+  "rate": 120000,
+  "owner_id": ObjectId("104")
+}
+
+{
+  "_id": ObjectId("5"),
+  "area": "Mumbai",
+  "rate": 90000,
+  "owner_id": ObjectId("101")
+}
+** Owner Collection:
+{
+  "_id": ObjectId("101"),
+  "name": "Mr.Patil",
+  "properties": [
+    ObjectId("1"),
+    ObjectId("5")
+  ]
+}
+
+{
+  "_id": ObjectId("102"),
+  "name": "Mr.Singh",
+  "properties": [
+    ObjectId("2")
+  ]
+}
+
+{
+  "_id": ObjectId("103"),
+  "name": "Ms.Sharma",
+  "properties": [
+    ObjectId("3")
+  ]
+}
+
+{
+  "_id": ObjectId("104"),
+  "name": "Mr.Kumar",
+  "properties": [
+    ObjectId("4")
+  ]
+}
+**Queries:
+a.
+db.property.find({}, { area: 1, rate: 1 })
+b.
+db.property.find({ owner_id: ObjectId("101") }).sort({ rate: 1 }).limit(1)
+c.
+db.owner.aggregate([
+  {
+    $lookup: {
+      from: "property",
+      localField: "_id",
+      foreignField: "owner_id",
+      as: "properties"
+    }
+  },
+  {
+    $match: { "properties.area": "Nashik" }
+  },
+  {
+    $project: { _id: 1, name: 1, properties: 1 }
+  }
+])
+d. 
+db.property.find({ rate: { $lt: 100000 } }, { area: 1 })
+
+Slip 2.
+Q1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <title>Bootstrap Container</title>
+</head>
+<body>
+
+<div class="container mt-5">
+
+  <!-- Row 1 -->
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Column 1</h5>
+          <p class="card-text">Content for Column 1 goes here.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Column 2</h5>
+          <p class="card-text">Content for Column 2 goes here.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Column 3</h5>
+          <p class="card-text">Content for Column 3 goes here.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add more rows and columns as needed -->
+
+</div>
+
+<!-- Bootstrap JS and Popper.js -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
+
+Q2.
+Newspaper Collection.
+{
+  "_id": ObjectId("newspaper_id"),
+  "name": "Newspaper_Name",
+  "language": "Language_Name",
+  "publisher_id": ObjectId("publisher_id"),
+  "city": "City_Name",
+  "sales": 50000
+}
+Publisher collection:
+{
+  "_id": ObjectId("publisher_id"),
+  "name": "Publisher_Name",
+  "state": "State_Name",
+  "newspapers": [
+    ObjectId("newspaper_id_1"),
+    ObjectId("newspaper_id_2"),
+    ObjectId("newspaper_id_3"),
+    ObjectId("newspaper_id_4"),
+    ObjectId("newspaper_id_5")
+  ]
+}
+City Collection:
+{
+  "_id": ObjectId("city_id"),
+  "name": "City_Name",
+  "newspapers": [
+    ObjectId("newspaper_id_1"),
+    ObjectId("newspaper_id_2"),
+    ObjectId("newspaper_id_3"),
+    ObjectId("newspaper_id_4"),
+    ObjectId("newspaper_id_5")
+  ]
+}
+Newspaper Collection.
+{
+  "_id": ObjectId("1"),
+  "name": "Times of Nashik",
+  "language": "English",
+  "publisher_id": ObjectId("101"),
+  "city": "Nashik",
+  "sales": 75000
+}
+
+{
+  "_id": ObjectId("2"),
+  "name": "Nashik Samachar",
+  "language": "Marathi",
+  "publisher_id": ObjectId("102"),
+  "city": "Nashik",
+  "sales": 60000
+}
+
+{
+  "_id": ObjectId("3"),
+  "name": "Gujarat Times",
+  "language": "Gujarati",
+  "publisher_id": ObjectId("103"),
+  "city": "Ahmedabad",
+  "sales": 80000
+}
+
+{
+  "_id": ObjectId("4"),
+  "name": "Maharashtra Daily",
+  "language": "Marathi",
+  "publisher_id": ObjectId("104"),
+  "city": "Mumbai",
+  "sales": 90000
+}
+
+{
+  "_id": ObjectId("5"),
+  "name": "Surat Express",
+  "language": "Gujarati",
+  "publisher_id": ObjectId("105"),
+  "city": "Surat",
+  "sales": 70000
+}
+Publisher collection:
+{
+  "_id": ObjectId("101"),
+  "name": "Times Media",
+  "state": "Maharashtra",
+  "newspapers": [
+    ObjectId("1")
+  ]
+}
+
+{
+  "_id": ObjectId("102"),
+  "name": "Marathi Publications",
+  "state": "Maharashtra",
+  "newspapers": [
+    ObjectId("2"),
+    ObjectId("4")
+  ]
+}
+
+{
+  "_id": ObjectId("103"),
+  "name": "Gujarat Press",
+  "state": "Gujarat",
+  "newspapers": [
+    ObjectId("3"),
+    ObjectId("5")
+  ]
+}
+
+{
+  "_id": ObjectId("104"),
+  "name": "Daily News",
+  "state": "Maharashtra",
+  "newspapers": [
+    ObjectId("4")
+  ]
+}
+
+{
+  "_id": ObjectId("105"),
+  "name": "Surat Media Group",
+  "state": "Gujarat",
+  "newspapers": [
+    ObjectId("5")
+  ]
+}
+City Collection:
+{
+  "_id": ObjectId("1"),
+  "name": "Nashik",
+  "newspapers": [
+    ObjectId("1"),
+    ObjectId("2")
+  ]
+}
+
+{
+  "_id": ObjectId("2"),
+  "name": "Ahmedabad",
+  "newspapers": [
+    ObjectId("3")
+  ]
+}
+
+{
+  "_id": ObjectId("3"),
+  "name": "Mumbai",
+  "newspapers": [
+    ObjectId("4")
+  ]
+}
+
+{
+  "_id": ObjectId("4"),
+  "name": "Surat",
+  "newspapers": [
+    ObjectId("5")
+  ]
+}
+Queries.
+a.
+db.city.aggregate([
+  {
+    $match: { name: "Nashik" }
+  },
+  {
+    $lookup: {
+      from: "newspaper",
+      localField: "newspapers",
+      foreignField: "_id",
+      as: "newspapers"
+    }
+  },
+  {
+    $project: { _id: 0, newspapers: { name: 1, language: 1 } }
+  }
+])
+
+b.
+db.newspaper.find({ language: "Marathi" }, { name: 1, language: 1 })
+C.
+db.publisher.count({ state: "Gujarat" })
+D.
+var cursor = db.newspaper.find(
+  { "publisher_id": { $in: db.publisher.find({ state: "Maharashtra" }, { _id: 1 }) } }
+).sort({ "sales": -1 });
+
+while (cursor.hasNext()) {
+  printjson(cursor.next());
+}
+
+Slip 3:
+Q1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <title>Image Thumbnails</title>
+</head>
+<body>
+
+<div class="container mt-5">
+  <div class="row">
+
+    <!-- Image 1 -->
+    <div class="col-md-4 mb-3">
+      <div class="card">
+        <img src="https://via.placeholder.com/150" class="card-img-top" alt="Image 1">
+        <div class="card-body">
+          <h5 class="card-title">Image 1</h5>
+        </div>
+      </div>
+    </div>
+
+    <!-- Image 2 -->
+    <div class="col-md-4 mb-3">
+      <div class="card">
+        <img src="https://via.placeholder.com/150" class="card-img-top" alt="Image 2">
+        <div class="card-body">
+          <h5 class="card-title">Image 2</h5>
+        </div>
+      </div>
+    </div>
+
+    <!-- Image 3 -->
+    <div class="col-md-4 mb-3">
+      <div class="card">
+        <img src="https://via.placeholder.com/150" class="card-img-top" alt="Image 3">
+        <div class="card-body">
+          <h5 class="card-title">Image 3</h5>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add more similar blocks for additional images -->
+
+  </div>
+</div>
+
+<!-- Bootstrap JS and Popper.js -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
+
+Q2.
+Employee Collection:
+{
+  "_id": ObjectId("employee_id"),
+  "name": "Employee_Name",
+  "salary": 60000,
+  "department_id": ObjectId("department_id"),
+  "image_url": "employee_image_url"
+}
+Department collection:
+{
+  "_id": ObjectId("department_id"),
+  "name": "Department_Name",
+  "employees": [
+    ObjectId("employee_id_1"),
+    ObjectId("employee_id_2"),
+    ObjectId("employee_id_3"),
+    ObjectId("employee_id_4"),
+    ObjectId("employee_id_5")
+  ]
+}
+Employee Collection:
+{
+  "_id": ObjectId("1"),
+  "name": "John Doe",
+  "salary": 65000,
+  "department_id": ObjectId("101"),
+  "image_url": "/images/john_doe.jpg"
+}
+
+{
+  "_id": ObjectId("2"),
+  "name": "Jane Smith",
+  "salary": 70000,
+  "department_id": ObjectId("102"),
+  "image_url": "/images/jane_smith.jpg"
+}
+
+{
+  "_id": ObjectId("3"),
+  "name": "Bob Johnson",
+  "salary": 60000,
+  "department_id": ObjectId("101"),
+  "image_url": "/images/bob_johnson.jpg"
+}
+
+{
+  "_id": ObjectId("4"),
+  "name": "Alice Brown",
+  "salary": 75000,
+  "department_id": ObjectId("103"),
+  "image_url": "/images/alice_brown.jpg"
+}
+
+{
+  "_id": ObjectId("5"),
+  "name": "Charlie Davis",
+  "salary": 55000,
+  "department_id": ObjectId("103"),
+  "image_url": "/images/charlie_davis.jpg"
+}
+
+Department collection:
+{
+  "_id": ObjectId("101"),
+  "name": "Sales",
+  "employees": [
+    ObjectId("1"),
+    ObjectId("3")
+  ]
+}
+
+{
+  "_id": ObjectId("102"),
+  "name": "Marketing",
+  "employees": [
+    ObjectId("2")
+  ]
+}
+
+{
+  "_id": ObjectId("103"),
+  "name": "Finance",
+  "employees": [
+    ObjectId("4"),
+    ObjectId("5")
+  ]
+}
+
+
+
+
+
+
+
+Slip 4:
+Q1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <title>Bootstrap Table</title>
+</head>
+<body>
+
+<div class="container mt-5">
+
+  <h2>Employee Information</h2>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Email ID</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>John</td>
+        <td>Doe</td>
+        <td>john.doe@example.com</td>
+      </tr>
+      <tr>
+        <td>Jane</td>
+        <td>Smith</td>
+        <td>jane.smith@example.com</td>
+      </tr>
+      <!-- Add more rows as needed -->
+    </tbody>
+  </table>
+
+</div>
+
+<!-- Bootstrap JS and Popper.js -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
+Q2.
+Hospital collection:
+{
+  "_id": ObjectId("hospital_id"),
+  "name": "Hospital_Name",
+  "city": "City_Name",
+  "specializations": [
+    "Pediatric",
+    "Gynaec",
+    "Orthopedic",
+    "Cardiology"
+    // Add more specializations as needed
+  ]
+}
+Review collection:
+{
+  "_id": ObjectId("review_id"),
+  "hospital_id": ObjectId("hospital_id"),
+  "reviewer_name": "Reviewer_Name",
+  "rating": 4,
+  "comment": "Review Comment"
+}
+Doctor collection:
+{
+  "_id": ObjectId("doctor_id"),
+  "name": "Doctor_Name",
+  "hospitals": [
+    ObjectId("hospital_id_1"),
+    ObjectId("hospital_id_2"),
+    ObjectId("hospital_id_3")
+    // Add more hospitals as needed
+  ]
+}
+Hospital collection:
+{
+  "_id": ObjectId("1"),
+  "name": "City Hospital",
+  "city": "Nashik",
+  "specializations": ["Pediatric", "Gynaec"]
+}
+
+{
+  "_id": ObjectId("2"),
+  "name": "OrthoCare",
+  "city": "Nashik",
+  "specializations": ["Orthopedic"]
+}
+
+{
+  "_id": ObjectId("3"),
+  "name": "Heartbeat Hospital",
+  "city": "Nashik",
+  "specializations": ["Cardiology"]
+}
+
+// Add more hospitals
+Review collection:
+{
+  "_id": ObjectId("101"),
+  "hospital_id": ObjectId("1"),
+  "reviewer_name": "John Doe",
+  "rating": 5,
+  "comment": "Excellent service and facilities."
+}
+
+{
+  "_id": ObjectId("102"),
+  "hospital_id": ObjectId("2"),
+  "reviewer_name": "Jane Smith",
+  "rating": 3,
+  "comment": "Good experience, but room for improvement."
+}
+
+// Add more reviews
+Doctor collection:
+{
+  "_id": ObjectId("201"),
+  "name": "Dr. Deshmukh",
+  "hospitals": [ObjectId("1"), ObjectId("3")]
+}
+
+{
+  "_id": ObjectId("202"),
+  "name": "Dr. Patel",
+  "hospitals": [ObjectId("2"), ObjectId("3")]
+}
+
+// Add more doctors
+Queries:
+a.
+db.hospital.find({ "specializations": "Cardiology" }, { "name": 1 })
+b.
+db.hospital.find({ "city": "Nashik" }, { "name": 1 })
+c.
+db.doctor.findOne({ "name": "Dr. Deshmukh" }).hospitals.forEach(function(hospitalId) {
+    var hospital = db.hospital.findOne({ "_id": hospitalId });
+    print(hospital.name);
+});
+d.
+db.review.find({ "rating": { $gte: 4 } }).forEach(function(review) {
+    var hospital = db.hospital.findOne({ "_id": review.hospital_id });
+    print(hospital.name);
+});
+
+
+Slip 5
+Q1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>List of Persons</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 50%;
+      margin: 20px;
+    }
+
+    th, td {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    td {
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>List of Persons</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Srno</th>
+        <th>Person Name</th>
+        <th>Age</th>
+        <th>Country</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>John Doe</td>
+        <td>30</td>
+        <td>USA</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Jane Smith</td>
+        <td>25</td>
+        <td>Canada</td>
+      </tr>
+      <!-- Add more rows as needed -->
+    </tbody>
+  </table>
+
+</body>
+</html>
+Q2.
+Employee Collection:
+{
+  "_id": ObjectId("employee_id"),
+  "name": "Employee_Name",
+  "projects": [
+    {
+      "project_id": ObjectId("project_id_1"),
+      "role": "Role_Name",
+      "duration": 2 // Duration in months
+    },
+    {
+      "project_id": ObjectId("project_id_2"),
+      "role": "Another_Role",
+      "duration": 4
+    }
+    // Add more projects as needed
+  ]
+}
+Project Collection:
+{
+  "_id": ObjectId("project_id"),
+  "name": "Project_Name",
+  "type": "Project_Type",
+  "duration": 5 // Duration in months
+}
+Employee Collection:
+{
+  "_id": ObjectId("1"),
+  "name": "John Doe",
+  "projects": [
+    {
+      "project_id": ObjectId("101"),
+      "role": "Developer",
+      "duration": 3
+    },
+    {
+      "project_id": ObjectId("102"),
+      "role": "Tester",
+      "duration": 4
+    }
+  ]
+}
+
+{
+  "_id": ObjectId("2"),
+  "name": "Jane Smith",
+  "projects": [
+    {
+      "project_id": ObjectId("101"),
+      "role": "Manager",
+      "duration": 3
+    },
+    {
+      "project_id": ObjectId("103"),
+      "role": "Designer",
+      "duration": 5
+    }
+  ]
+}
+
+// Add more employees
+Project Collection:
+{
+  "_id": ObjectId("101"),
+  "name": "Project A",
+  "type": "Software",
+  "duration": 3
+}
+
+{
+  "_id": ObjectId("102"),
+  "name": "Project B",
+  "type": "Marketing",
+  "duration": 6
+}
+
+{
+  "_id": ObjectId("103"),
+  "name": "Project C",
+  "type": "Research",
+  "duration": 4
+}
+
+// Add more projects
+Queries:
+a.
+db.projects.find({ "type": "Software" }, { "name": 1 })
+b.
+db.projects.find({ "duration": { $gt: 3 } }, { "name": 1 })
+c.
+db.employees.count({ "projects.project_id": ObjectId("101") })
+
+d.
+db.employees.findOne({ "name": "Mr. Patil" }, { "projects.project_id": 1 }).projects.forEach(function(project) {
+  var projectDetails = db.projects.findOne({ "_id": project.project_id });
+  print(projectDetails.name);
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Slip 6:
+Q1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Web Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px;
+      background-color: #f2f2f2;
+    }
+
+    nav {
+      margin-top: 20px;
+    }
+
+    nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      background-color: #333;
+      overflow: hidden;
+    }
+
+    nav li {
+      float: left;
+    }
+
+    nav li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    nav li a:hover {
+      background-color: #ddd;
+      color: black;
+    }
+
+    main {
+      margin-top: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="logo.png" alt="Company Logo" width="150">
+    <h1>Welcome to My Website</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About Us</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section id="home">
+      <h2>Home</h2>
+      <p>This is the home section of the website. Welcome!</p>
+      <img src="home_image.jpg" alt="Home Image" width="500">
+    </section>
+
+    <section id="about">
+      <h2>About Us</h2>
+      <p>We are a fantastic company doing amazing things.</p>
+    </section>
+
+    <section id="services">
+      <h2>Our Services</h2>
+      <ul>
+        <li>Service 1</li>
+        <li>Service 2</li>
+        <li>Service 3</li>
+      </ul>
+    </section>
+
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <p>Feel free to reach out to us at <a href="mailto:info@example.com">info@example.com</a>.</p>
+    </section>
+
+    <h2>Our Team</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Position</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>John Doe</td>
+          <td>CEO</td>
+        </tr>
+        <tr>
+          <td>Jane Smith</td>
+          <td>CTO</td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+
+</body>
+</html>
+Q2.
+Customer Collection:
+{
+  "_id": ObjectId("customer_id"),
+  "name": "Customer_Name",
+  "policies": [
+    {
+      "policy_id": ObjectId("policy_id_1"),
+      "policy_type": "Policy_Type",
+      "premium_amount": 1000
+    },
+    {
+      "policy_id": ObjectId("policy_id_2"),
+      "policy_type": "Policy_Type",
+      "premium_amount": 1500
+    }
+    // Add more policies as needed
+  ]
+}
+Policies collection:
+{
+  "_id": ObjectId("policy_id"),
+  "name": "Policy_Name",
+  "type": "Policy_Type",
+  "benefit": "Policy_Benefit"
+}
+Customer Collection:
+{
+  "_id": ObjectId("1"),
+  "name": "John Doe",
+  "policies": [
+    {
+      "policy_id": ObjectId("101"),
+      "policy_type": "Komal Jeevan",
+      "premium_amount": 1200
+    },
+    {
+      "policy_id": ObjectId("102"),
+      "policy_type": "Life Insurance",
+      "premium_amount": 1800
+    }
+  ]
+}
+
+{
+  "_id": ObjectId("2"),
+  "name": "Jane Smith",
+  "policies": [
+    {
+      "policy_id": ObjectId("103"),
+      "policy_type": "Health Insurance",
+      "premium_amount": 1000
+    },
+    {
+      "policy_id": ObjectId("104"),
+      "policy_type": "Komal Jeevan",
+      "premium_amount": 1500
+    }
+  ]
+}
+
+// Add more customers
+Policies collection:
+{
+  "_id": ObjectId("101"),
+  "name": "Komal Jeevan",
+  "type": "Monthly",
+  "benefit": "Death Benefit"
+}
+
+{
+  "_id": ObjectId("102"),
+  "name": "Life Insurance",
+  "type": "Yearly",
+  "benefit": "Accidental Coverage"
+}
+
+{
+  "_id": ObjectId("103"),
+  "name": "Health Insurance",
+  "type": "Half Yearly",
+  "benefit": "Medical Coverage"
+}
+
+{
+  "_id": ObjectId("104"),
+  "name": "Policy XYZ",
+  "type": "Monthly",
+  "benefit": "Benefit ABC"
+}
+
+// Add more policies
+Queries:
+a.
+db.customers.find({ "policies.policy_type": "Komal Jeevan" })
+b.
+db.customers.aggregate([
+  {
+    $unwind: "$policies"
+  },
+  {
+    $group: {
+      _id: null,
+      averagePremium: { $avg: "$policies.premium_amount" }
+    }
+  }
+])
+c.
+db.customers.updateMany(
+  { "policies.policy_type": "Monthly" },
+  { $mul: { "policies.$.premium_amount": 1.05 } }
+)
+d.
+db.customers.count({ "policies.policy_type": "Half Yearly" })
+
+Slip 7:
+Q1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Web Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px;
+      background-color: #f2f2f2;
+    }
+
+    nav {
+      margin-top: 20px;
+    }
+
+    nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      background-color: #333;
+      overflow: hidden;
+    }
+
+    nav li {
+      float: left;
+    }
+
+    nav li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    nav li a:hover {
+      background-color: #ddd;
+      color: black;
+    }
+
+    main {
+      margin-top: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="logo.png" alt="Company Logo" width="150">
+    <h1>Welcome to My Website</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About Us</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section id="home">
+      <h2>Home</h2>
+      <p>This is the home section of the website. Welcome!</p>
+      <img src="home_image.jpg" alt="Home Image" width="500">
+    </section>
+
+    <section id="about">
+      <h2>About Us</h2>
+      <p>We are a fantastic company doing amazing things.</p>
+    </section>
+
+    <section id="services">
+      <h2>Our Services</h2>
+      <ul>
+        <li>Service 1</li>
+        <li>Service 2</li>
+        <li>Service 3</li>
+      </ul>
+    </section>
+
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <p>Feel free to reach out to us at <a href="mailto:info@example.com">info@example.com</a>.</p>
+    </section>
+
+    <h2>Our Team</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Position</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>John Doe</td>
+          <td>CEO</td>
+        </tr>
+        <tr>
+          <td>Jane Smith</td>
+          <td>CTO</td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+
+</body>
+</html>
+Q2.
+Customer collection:
+{
+  "_id": ObjectId("customer_id"),
+  "first_name": "First_Name",
+  "last_name": "Last_Name",
+  "account": {
+    "account_id": ObjectId("account_id"),
+    "open_date": ISODate("2020-01-01"),
+    "branch": "Branch_Name",
+    "account_type": "Account_Type" // e.g., "Savings", "Loan", etc.
+  }
+}
+Transaction collection:
+{
+  "_id": ObjectId("transaction_id"),
+  "customer_id": ObjectId("customer_id"),
+  "transaction_date": ISODate("2022-01-01"),
+  "amount": 5000,
+  "transaction_type": "Transaction_Type" // e.g., "Deposit", "Withdrawal", etc.
+}
+Customer collection:
+{
+  "_id": ObjectId("1"),
+  "first_name": "John",
+  "last_name": "Doe",
+  "account": {
+    "account_id": ObjectId("101"),
+    "open_date": ISODate("2020-01-01"),
+    "branch": "Main Branch",
+    "account_type": "Savings"
+  }
+}
+
+{
+  "_id": ObjectId("2"),
+  "first_name": "Jane",
+  "last_name": "Smith",
+  "account": {
+    "account_id": ObjectId("102"),
+    "open_date": ISODate("2020-01-01"),
+    "branch": "Downtown Branch",
+    "account_type": "Loan"
+  }
+}
+
+// Add more customers
+Transaction collection:
+{
+  "_id": ObjectId("201"),
+  "customer_id": ObjectId("1"),
+  "transaction_date": ISODate("2022-01-05"),
+  "amount": 2000,
+  "transaction_type": "Deposit"
+}
+
+{
+  "_id": ObjectId("202"),
+  "customer_id": ObjectId("1"),
+  "transaction_date": ISODate("2022-02-10"),
+  "amount": 1000,
+  "transaction_type": "Withdrawal"
+}
+
+// Add more transactions
+Queries:
+a.
+db.customers.find({ "first_name": /^S/i }, { "first_name": 1, "last_name": 1 })
+b.
+db.customers.find({ "account.open_date": ISODate("2020-01-01"), "account.branch": "Main Branch" })
+c.
+db.customers.find({ "account.account_type": "Savings" }, { "first_name": 1, "last_name": 1 })
+d.
+db.customers.count({ "account.account_type": "Loan", "account.branch": "Downtown Branch" })
+
+
+
+Slip 8:
+Q1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <title>Bootstrap Buttons</title>
+</head>
+<body>
+
+  <div class="container mt-5">
+    <h2>Bootstrap Buttons with Different Styles</h2>
+
+    <button type="button" class="btn btn-secondary mr-2">Secondary</button>
+    <button type="button" class="btn btn-primary mr-2">Primary</button>
+    <button type="button" class="btn btn-success mr-2">Success</button>
+    <button type="button" class="btn btn-danger mr-2">Danger</button>
+    <button type="button" class="btn btn-warning mr-2">Warning</button>
+    <button type="button" class="btn btn-info mr-2">Info</button>
+    <button type="button" class="btn btn-dark">Dark</button>
+
+  </div>
+
+  <!-- Bootstrap JS and Popper.js -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
+Q2.
+Item collection:
+{
+  "_id": ObjectId("item_id"),
+  "name": "Item_Name",
+  "quantity": 200,
+  "tags": ["Tag1", "Tag2"],
+  "status": "A",
+  "height": 10
+}
+Warehouse collection:
+{
+  "_id": ObjectId("warehouse_id"),
+  "name": "Warehouse_Name",
+  "items": [
+    {
+      "item_id": ObjectId("item_id_1"),
+      "quantity_in_stock": 150
+    },
+    {
+      "item_id": ObjectId("item_id_2"),
+      "quantity_in_stock": 250
+    }
+    // Add more items in the warehouse as needed
+  ]
+}
+Item collection:
+{
+  "_id": ObjectId("1"),
+  "name": "Widget",
+  "quantity": 400,
+  "tags": ["Electronics", "Gadgets"],
+  "status": "A",
+  "height": 12
+}
+
+{
+  "_id": ObjectId("2"),
+  "name": "Planner",
+  "quantity": 30,
+  "tags": ["Office Supplies"],
+  "status": "B",
+  "height": 8
+}
+
+// Add more items
+Warehouse collection:
+{
+  "_id": ObjectId("101"),
+  "name": "Warehouse A",
+  "items": [
+    {
+      "item_id": ObjectId("1"),
+      "quantity_in_stock": 100
+    },
+    {
+      "item_id": ObjectId("2"),
+      "quantity_in_stock": 20
+    }
+  ]
+}
+
+{
+  "_id": ObjectId("102"),
+  "name": "Warehouse B",
+  "items": [
+    {
+      "item_id": ObjectId("1"),
+      "quantity_in_stock": 50
+    },
+    {
+      "item_id": ObjectId("2"),
+      "quantity_in_stock": 10
+    }
+  ]
+}
+
+// Add more warehouses
+Queries:
+a.
+db.items.find({ "quantity": { $gt: 300 } })
+b.
+db.items.find({ "tags": { $exists: true, $not: { $size: 5 } } })
+c.
+db.items.find({
+  $or: [
+    { "status": "B" },
+    { $and: [{ "quantity": { $lt: 50 } }, { "height": { $gt: 8 } }] }
+  ]
+})
+
+d.
+db.warehouses.find({
+  "items": {
+    $elemMatch: {
+      "item_id": ObjectId("2"),
+      "quantity_in_stock": { $lt: 20 }
+    }
+  }
+})
+
+Slip 8:
+Q1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <title>Bootstrap Buttons</title>
+</head>
+<body>
+
+  <div class="container mt-5">
+    <h2>Bootstrap Buttons with Different Styles</h2>
+
+    <button type="button" class="btn btn-secondary mr-2">Secondary</button>
+    <button type="button" class="btn btn-primary mr-2">Primary</button>
+    <button type="button" class="btn btn-success mr-2">Success</button>
+    <button type="button" class="btn btn-danger mr-2">Danger</button>
+    <button type="button" class="btn btn-warning mr-2">Warning</button>
+    <button type="button" class="btn btn-info mr-2">Info</button>
+    <button type="button" class="btn btn-dark">Dark</button>
+
+  </div>
+
+  <!-- Bootstrap JS and Popper.js -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
+Q2.
+Customer collection:
+{
+  "_id": ObjectId("customer_id"),
+  "name": "Customer_Name",
+  "address": "Customer_Address"
+}
+Loans collection:
+{
+  "_id": ObjectId("loan_id"),
+  "customer_id": ObjectId("customer_id"),
+  "loan_type": "Loan_Type",
+  "loan_amount": 100000,
+  "city": "Loan_City"
+}
+Customer collection:
+{
+  "_id": ObjectId("1"),
+  "name": "John Doe",
+  "address": "123 Main St, City A"
+}
+
+{
+  "_id": ObjectId("2"),
+  "name": "Jane Smith",
+  "address": "456 Oak St, City B"
+}
+
+// Add more customers
+Loans collection:
+{
+  "_id": ObjectId("101"),
+  "customer_id": ObjectId("1"),
+  "loan_type": "Home Loan",
+  "loan_amount": 150000,
+  "city": "City A"
+}
+
+{
+  "_id": ObjectId("102"),
+  "customer_id": ObjectId("1"),
+  "loan_type": "Car Loan",
+  "loan_amount": 80000,
+  "city": "City B"
+}
+
+// Add more loans
+
+
+Queries:
+a.
+db.customers.find({ "name": /^D/i })
+b.
+db.customers.aggregate([
+  {
+    $lookup: {
+      from: "loans",
+      localField: "_id",
+      foreignField: "customer_id",
+      as: "loans"
+    }
+  },
+  {
+    $match: { "loans.city": "Pimpri" }
+  },
+  {
+    $sort: { "name": -1 }
+  },
+  {
+    $project: { "_id": 0, "name": 1 }
+  }
+])
+c.
+db.customers.aggregate([
+  {
+    $lookup: {
+      from: "loans",
+      localField: "_id",
+      foreignField: "customer_id",
+      as: "loans"
+    }
+  },
+  {
+    $unwind: "$loans"
+  },
+  {
+    $sort: { "loans.loan_amount": -1 }
+  },
+  {
+    $limit: 1
+  },
+  {
+    $project: { "_id": 0, "name": 1, "address": 1, "maxLoanAmount": "$loans.loan_amount" }
+  }
+])
+d.
+db.customers.update(
+  { "name": "Mr. Patil", "loans.loan_amount": { $gt: 100000 } },
+  { $set: { "address": "New Address" } }
+)
+Slip 10:
+Q1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transition Example</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+
+    .transition-box {
+      width: 200px;
+      height: 200px;
+      background-color: #3498db;
+      transition: background-color 0.5s ease-in-out; /* Transition property */
+      transition-delay: 0.2s; /* Transition delay */
+    }
+
+    .transition-box:hover {
+      background-color: #e74c3c;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="transition-box"></div>
+
+</body>
+</html>
+Q2.
+Product collection:
+{
+  "_id": ObjectId("product_id"),
+  "name": "Product_Name",
+  "brand_id": ObjectId("brand_id"),
+  "warranty_period": "1 year",
+  "rating": 4.5
+}
+Band collection:
+{
+  "_id": ObjectId("brand_id"),
+  "name": "Brand_Name",
+  "rating": 4.2
+}
+Customer collection:
+{
+  "_id": ObjectId("customer_id"),
+  "name": "Customer_Name",
+  "city": "Customer_City",
+  "purchase_date": ISODate("2023-08-15"),
+  "bill_amount": 60000
+}
+Product collection:
+{
+  "_id": ObjectId("1"),
+  "name": "Laptop",
+  "brand_id": ObjectId("101"),
+  "warranty_period": "1 year",
+  "rating": 4.6
+}
+
+{
+  "_id": ObjectId("2"),
+  "name": "Smartphone",
+  "brand_id": ObjectId("102"),
+  "warranty_period": "2 years",
+  "rating": 4.2
+}
+
+// Add more products
+Band collection:
+{
+  "_id": ObjectId("101"),
+  "name": "ABC Electronics",
+  "rating": 4.5
+}
+
+{
+  "_id": ObjectId("102"),
+  "name": "XYZ Mobiles",
+  "rating": 4.2
+}
+
+// Add more brands
+Customer collection:
+{
+  "_id": ObjectId("201"),
+  "name": "John Doe",
+  "city": "City_A",
+  "purchase_date": ISODate("2023-08-15"),
+  "bill_amount": 55000
+}
+
+{
+  "_id": ObjectId("202"),
+  "name": "Jane Smith",
+  "city": "City_B",
+  "purchase_date": ISODate("2023-08-15"),
+  "bill_amount": 65000
+}
+
+// Add more customers
+Queries:
+a.
+db.products.find({ "warranty_period": "1 year" }, { "name": 1, "_id": 0 })
+b.
+db.customers.find({ "purchase_date": ISODate("2023-08-15") })
+c.
+db.products.aggregate([
+  {
+    $lookup: {
+      from: "brands",
+      localField: "brand_id",
+      foreignField: "_id",
+      as: "brand"
+    }
+  },
+  {
+    $sort: { "brand.rating": -1 }
+  },
+  {
+    $limit: 1
+  },
+  {
+    $project: { "_id": 0, "product_name": "$name", "brand_name": "$brand.name" }
+  }
+])
+d.
+db.customers.find({ "city": "City_A", "bill_amount": { $gt: 50000 } })
+
+Slip 11:
+Q1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Department Information</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      margin: 0;
+    }
+
+    header {
+      background-color: #333;
+      color: white;
+      padding: 10px;
+      text-align: center;
+    }
+
+    main {
+      display: flex;
+      flex: 1;
+    }
+
+    nav {
+      background-color: #eee;
+      padding: 20px;
+      width: 20%;
+      box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    nav a {
+      display: block;
+      margin-bottom: 10px;
+      text-decoration: none;
+      color: #333;
+    }
+
+    section {
+      flex: 1;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Company Name</h1>
+  </header>
+
+  <main>
+    <nav>
+      <a href="#" onclick="showDepartment('HR')">HR</a>
+      <a href="#" onclick="showDepartment('Finance')">Finance</a>
+      <a href="#" onclick="showDepartment('IT')">IT</a>
+      <!-- Add more departments as needed -->
+    </nav>
+
+    <section id="departmentInfo">
+      <p>Select a department to view information.</p>
+    </section>
+  </main>
+
+  <script>
+    function showDepartment(department) {
+      // Add logic to fetch and display department information
+      // For now, just display a placeholder message
+      document.getElementById('departmentInfo').innerHTML = `<h2>${department} Department</h2><p>Department information goes here.</p>`;
+    }
+  </script>
+
+</body>
+</html>
+Q2.
+Product collection:
+{
+  "_id": ObjectId("product_id"),
+  "name": "Product_Name",
+  "price": 50.0,
+  "quantity_available": 100
+}
+Customers collection:
+{
+  "_id": ObjectId("customer_id"),
+  "name": "Customer_Name",
+  "email": "customer@example.com",
+  "address": "Customer_Address"
+}
+Order collection:
+{
+  "_id": ObjectId("order_id"),
+  "customer_id": ObjectId("customer_id"),
+  "products": [
+    {
+      "product_id": ObjectId("product_id"),
+      "quantity": 2
+    },
+    // Add more products as needed
+  ],
+  "order_date": ISODate("2023-01-15"),
+  "processed": false
+}
+Invoice collection:
+{
+  "_id": ObjectId("invoice_id"),
+  "order_id": ObjectId("order_id"),
+  "total_amount": 100.0,
+  "invoice_date": ISODate("2023-01-16")
+}
+Product collection:
+{
+  "_id": ObjectId("1"),
+  "name": "Laptop",
+  "price": 800.0,
+  "quantity_available": 50
+}
+
+{
+  "_id": ObjectId("2"),
+  "name": "Smartphone",
+  "price": 300.0,
+  "quantity_available": 100
+}
+
+// Add more products
+Customers collection:
+{
+  "_id": ObjectId("101"),
+  "name": "Mr. Rajiv",
+  "email": "rajiv@example.com",
+  "address": "123 Main St, City"
+}
+
+{
+  "_id": ObjectId("102"),
+  "name": "Ms. Priya",
+  "email": "priya@example.com",
+  "address": "456 Oak St, Town"
+}
+
+// Add more customers
+Order collection:
+{
+  "_id": ObjectId("201"),
+  "customer_id": ObjectId("101"),
+  "products": [
+    { "product_id": ObjectId("1"), "quantity": 1 },
+    { "product_id": ObjectId("2"), "quantity": 2 }
+  ],
+  "order_date": ISODate("2023-01-15"),
+  "processed": false
+}
+
+{
+  "_id": ObjectId("202"),
+  "customer_id": ObjectId("102"),
+  "products": [
+    { "product_id": ObjectId("1"), "quantity": 3 }
+  ],
+  "order_date": ISODate("2023-01-16"),
+  "processed": true
+}
+
+// Add more orders
+Invoice collection:
+{
+  "_id": ObjectId("301"),
+  "order_id": ObjectId("201"),
+  "total_amount": 1400.0,
+  "invoice_date": ISODate("2023-01-16")
+}
+
+{
+  "_id": ObjectId("302"),
+  "order_id": ObjectId("202"),
+  "total_amount": 2400.0,
+  "invoice_date": ISODate("2023-01-17")
+}
+
+// Add more invoices
+Queries:
+a.
+db.products.find({})
+b.
+db.orders.aggregate([
+  {
+    $unwind: "$products"
+  },
+  {
+    $lookup: {
+      from: "products",
+      localField: "products.product_id",
+      foreignField: "_id",
+      as: "productDetails"
+    }
+  },
+  {
+    $addFields: {
+      "totalValue": { $multiply: ["$products.quantity", { $arrayElemAt: ["$productDetails.price", 0] }] }
+    }
+  },
+  {
+    $group: {
+      _id: "$_id",
+      order_date: { $first: "$order_date" },
+      totalValue: { $sum: "$totalValue" },
+      products: { $push: "$products" }
+    }
+  },
+  {
+    $match: { "totalValue": { $gt: 20000 } }
+  }
+])
+c.
+db.orders.find({ "processed": false })
+d.
+db.orders.aggregate([
+  {
+    $match: { "processed": true }
+  },
+  {
+    $lookup: {
+      from: "invoices",
+      localField: "_id",
+      foreignField: "order_id",
+      as: "invoice"
+    }
+  },
+  {
+    $lookup: {
+      from: "customers",
+      localField: "customer_id",
+      foreignField: "_id",
+      as: "customer"
+    }
+  },
+  {
+    $match: { "customer.name": "Mr. Rajiv" }
+  },
+  {
+    $project: {
+      _id: 1,
+      order_date: 1,
+      products: 1,
+      invoice: {
+        $cond: {
+          if: { $isArray: "$invoice" },
+          then: { $arrayElemAt: ["$invoice", 0] },
+          else: null
+        }
+      }
+    }
+  }
+])
+
+Slip 12:
+Q1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Registration Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    form {
+      max-width: 400px;
+      margin: auto;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 16px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button[type="reset"] {
+      background-color: #f44336;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Customer Registration Form</h2>
+
+  <form action="#" method="post">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="contact">Contact Number:</label>
+    <input type="tel" id="contact" name="contact" pattern="[0-9]{10}" placeholder="Enter 10-digit number" required>
+
+    <label>Gender:</label>
+    <label><input type="radio" name="gender" value="male" required> Male</label>
+    <label><input type="radio" name="gender" value="female" required> Female</label>
+
+    <label for="days">Preferred Days of Purchasing:</label>
+    <select id="days" name="days" multiple>
+      <option value="monday">Monday</option>
+      <option value="tuesday">Tuesday</option>
+      <option value="wednesday">Wednesday</option>
+      <option value="thursday">Thursday</option>
+      <option value="friday">Friday</option>
+      <option value="saturday">Saturday</option>
+      <option value="sunday">Sunday</option>
+    </select>
+
+    <label for="favoriteItem">Favorite Item:</label>
+    <select id="favoriteItem" name="favoriteItem">
+      <option value="clothing">Clothing</option>
+      <option value="electronics">Electronics</option>
+      <option value="groceries">Groceries</option>
+      <option value="homeGoods">Home Goods</option>
+      <!-- Add more options as needed -->
+    </select>
+
+    <label for="suggestions">Suggestions:</label>
+    <textarea id="suggestions" name="suggestions" rows="4"></textarea>
+
+    <button type="submit">Submit</button>
+    <button type="reset">Reset</button>
+  </form>
+
+</body>
+</html>
+Q2.
+Movies collection:
+{
+  "_id": ObjectId("movie_id"),
+  "title": "Movie_Title",
+  "budget": 10000000,
+  "year": 2022,
+  "producers": [
+    {
+      "producer_id": ObjectId("producer_id"),
+      "role": "Main"
+    },
+    // Add more producers as needed
+  ],
+  "actors": [
+    {
+      "actor_id": ObjectId("actor_id"),
+      "role": "Lead"
+    },
+    // Add more actors as needed
+  ]
+}
+Producer collection:
+{
+  "_id": ObjectId("producer_id"),
+  "name": "Producer_Name",
+  "movies_produced": [
+    {
+      "movie_id": ObjectId("movie_id"),
+      "year": 2022
+    },
+    // Add more movies produced as needed
+  ]
+}
+Actor collection:
+{
+  "_id": ObjectId("actor_id"),
+  "name": "Actor_Name",
+  "movies_acted": [
+    {
+      "movie_id": ObjectId("movie_id"),
+      "role": "Lead"
+    },
+    // Add more movies acted as needed
+  ]
+}
+Movies collection:
+{
+  "_id": ObjectId("1"),
+  "title": "Inception",
+  "budget": 160000000,
+  "year": 2010,
+  "producers": [
+    { "producer_id": ObjectId("101"), "role": "Main" },
+    { "producer_id": ObjectId("102"), "role": "Supporting" }
+  ],
+  "actors": [
+    { "actor_id": ObjectId("201"), "role": "Lead" },
+    { "actor_id": ObjectId("202"), "role": "Supporting" }
+  ]
+}
+
+{
+  "_id": ObjectId("2"),
+  "title": "The Dark Knight",
+  "budget": 185000000,
+  "year": 2008,
+  "producers": [
+    { "producer_id": ObjectId("101"), "role": "Main" }
+  ],
+  "actors": [
+    { "actor_id": ObjectId("202"), "role": "Lead" },
+    { "actor_id": ObjectId("203"), "role": "Supporting" }
+  ]
+}
+
+// Add more movies
+Producer collection:
+{
+  "_id": ObjectId("101"),
+  "name": "Christopher Nolan",
+  "movies_produced": [
+    { "movie_id": ObjectId("1"), "year": 2010 },
+    { "movie_id": ObjectId("2"), "year": 2008 }
+  ]
+}
+
+{
+  "_id": ObjectId("102"),
+  "name": "Emma Thomas",
+  "movies_produced": [
+    { "movie_id": ObjectId("1"), "year": 2010 }
+  ]
+}
+
+// Add more producers
+Actor collection:
+{
+  "_id": ObjectId("201"),
+  "name": "Leonardo DiCaprio",
+  "movies_acted": [
+    { "movie_id": ObjectId("1"), "role": "Lead" }
+  ]
+}
+
+{
+  "_id": ObjectId("202"),
+  "name": "Christian Bale",
+  "movies_acted": [
+    { "movie_id": ObjectId("1"), "role": "Supporting" },
+    { "movie_id": ObjectId("2"), "role": "Lead" }
+  ]
+}
+
+// Add more actors
+Queries:
+a.
+db.movies.find().sort({ "budget": -1 }).limit(1)
+b.
+db.producers.aggregate([
+  {
+    $unwind: "$movies_produced"
+  },
+  {
+    $group: {
+      _id: {
+        producer_id: "$_id",
+        year: "$movies_produced.year"
+      },
+      count: { $sum: 1 }
+    }
+  },
+  {
+    $match: { "count": { $gt: 1 } }
+  },
+  {
+    $lookup: {
+      from: "producers",
+      localField: "_id.producer_id",
+      foreignField: "_id",
+      as: "producerDetails"
+    }
+  },
+  {
+    $project: {
+      _id: 1,
+      producerDetails: { $arrayElemAt: ["$producerDetails", 0] }
+    }
+  }
+])
+c.
+db.actors.find({
+  "movies_acted.movie_id": {
+    $in: db.actors.find({ name: "Akshay" }).toArray()[0].movies_acted.map(movie => movie.movie_id)
+  }
+})
+d.
+db.movies.aggregate([
+  {
+    $unwind: "$producers"
+  },
+  {
+    $group: {
+      _id: "$_id",
+      title: { $first: "$title" },
+      producerCount: { $sum: 1 }
+    }
+  },
+  {
+    $match: { "producerCount": { $gt: 1 } }
+  }
+])
+Slip 13:
+Q1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Useful Web</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+    }
+
+    nav {
+      background-color: #eee;
+      padding: 10px;
+    }
+
+    section {
+      padding: 20px;
+    }
+
+    aside {
+      float: right;
+      width: 30%;
+      padding: 20px;
+      background-color: #f2f2f2;
+    }
+
+    footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Welcome to My Useful Web</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section>
+    <h2>Home</h2>
+    <p>This is the home section of the website. Add your content here.</p>
+  </section>
+
+  <aside>
+    <h3>Latest News</h3>
+    <p>Stay updated with the latest news and updates here.</p>
+  </aside>
+
+  <footer>
+    <p>&copy; 2023 My Useful Web. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
+Q2.
+Competition collection:
+{
+  "_id": ObjectId("competition_id"),
+  "name": "Competition_Name",
+  "participants": [
+    {
+      "student_id": ObjectId("student_id"),
+      "position": "First"
+    },
+    // Add more participants as needed
+  ]
+}
+Student Collection:
+{
+  "_id": ObjectId("student_id"),
+  "name": "Student_Name",
+  "class": "Student_Class",
+  "participations": [
+    {
+      "competition_id": ObjectId("competition_id"),
+      "position": "Second"
+    },
+    // Add more participations as needed
+  ]
+}
+Competition collection:
+{
+  "_id": ObjectId("1"),
+  "name": "Programming Competition",
+  "participants": [
+    { "student_id": ObjectId("101"), "position": "First" },
+    { "student_id": ObjectId("102"), "position": "Second" },
+    { "student_id": ObjectId("103"), "position": "Third" },
+    // Add more participants
+  ]
+}
+
+{
+  "_id": ObjectId("2"),
+  "name": "E-Rangoli Competition",
+  "participants": [
+    { "student_id": ObjectId("104"), "position": "First" },
+    { "student_id": ObjectId("105"), "position": "Second" },
+    { "student_id": ObjectId("106"), "position": "Third" },
+    // Add more participants
+  ]
+}
+
+// Add more competitions
+Student Collection:
+{
+  "_id": ObjectId("101"),
+  "name": "John Doe",
+  "class": "FY",
+  "participations": [
+    { "competition_id": ObjectId("1"), "position": "First" },
+    // Add more participations
+  ]
+}
+
+{
+  "_id": ObjectId("102"),
+  "name": "Jane Smith",
+  "class": "SY",
+  "participations": [
+    { "competition_id": ObjectId("1"), "position": "Second" },
+    // Add more participations
+  ]
+}
+
+// Add more students
+Queries:
+a.
+db.competitions.aggregate([
+  {
+    $project: {
+      _id: 1,
+      averageParticipants: {
+        $avg: { $size: "$participants" }
+      }
+    }
+  }
+])
+b.
+db.competitions.findOne({ name: "Programming Competition" }).participants.length
+c.
+db.competitions.aggregate([
+  {
+    $project: {
+      _id: 1,
+      winners: { $slice: ["$participants", 3] }
+    }
+  }
+])
+d.
+db.students.find({
+  "class": "FY",
+  "participations.competition_id": ObjectId("2")
+})
+
+Slip 14:
+Q1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel Plan Booking Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    form {
+      max-width: 600px;
+      margin: 20px auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    input[type="checkbox"] {
+      margin-bottom: 0;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button[type="reset"] {
+      background-color: #f44336;
+    }
+  </style>
+</head>
+<body>
+
+  <form action="#" method="post">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="address">Address:</label>
+    <input type="text" id="address" name="address" required>
+
+    <label for="contact">Contact No.:</label>
+    <input type="tel" id="contact" name="contact" pattern="[0-9]{10}" required>
+
+    <label>Gender:</label>
+    <label><input type="radio" name="gender" value="male"> Male</label>
+    <label><input type="radio" name="gender" value="female"> Female</label>
+
+    <label for="season">Preferred Season:</label>
+    <label><input type="checkbox" name="season" value="spring"> Spring</label>
+    <label><input type="checkbox" name="season" value="summer"> Summer</label>
+    <label><input type="checkbox" name="season" value="autumn"> Autumn</label>
+    <label><input type="checkbox" name="season" value="winter"> Winter</label>
+
+    <label for="location">Location Type:</label>
+    <select id="location" name="location">
+      <option value="beach">Beach</option>
+      <option value="mountain">Mountain</option>
+      <option value="city">City</option>
+      <option value="countryside">Countryside</option>
+    </select>
+
+    <button type="submit">Submit</button>
+    <button type="reset">Reset</button>
+  </form>
+
+</body>
+</html>
+Q2.
+// Nodes
+CREATE (government:Government {name: 'Government'})
+CREATE (scholarship:Scholarship {name: 'Scholarship_Name1', category: 'OBC', incomeLimit: 50000})
+CREATE (scholarship:Scholarship {name: 'Scholarship_Name2', category: 'General', incomeLimit: 60000})
+// Add more scholarships as needed
+
+CREATE (student:Student {name: 'Student1', year: '2020-2021', income: 48000})
+CREATE (student:Student {name: 'Student2', year: '2020-2021', income: 55000})
+// Add more students as needed
+
+// Relationships
+CREATE (student)-[:APPLIES_FOR]->(scholarship)
+CREATE (student)-[:BENEFITS_FROM]->(scholarship)
+CREATE (student)-[:RECOMMENDS]->(student)
+Queries:
+a.
+MATCH (s:Scholarship {category: 'OBC'})
+RETURN s.name;
+b.
+MATCH (student:Student)-[:BENEFITS_FROM]->(scholarship:Scholarship {name: 'Scholarship_Name1'})
+WHERE student.year = '2020-2021'
+RETURN COUNT(student) AS numberOfStudents;
+c.
+MATCH (scholarship:Scholarship {name: 'Scholarship_Name2'})
+SET scholarship.incomeLimit = 65000;
+d.
+MATCH (scholarship:Scholarship)<-[:BENEFITS_FROM]-(student:Student)
+WITH scholarship, COUNT(student) AS popularity
+RETURN scholarship.name
+ORDER BY popularity DESC
+LIMIT 1;
+
+Slip 15:
+Q1.
+Q2.
+(:Movie {title, releaseYear, business})
+(:Actor {name, birthYear})
+(:ACTED_IN {role})
+(:RECEIVED_AWARD {category})
+Queries
+a.
+MATCH (m:Movie)
+RETURN m
+ORDER BY m.business DESC
+LIMIT 1;
+b.
+MATCH (m:Movie)-[r:ACTED_IN]->(a:Actor)
+RETURN m.title, m.releaseYear, m.business, COLLECT(a.name) AS actors;
+c.
+MATCH (:Actor {name: 'Shahrukh Khan'})-[:ACTED_IN]->(m:Movie)
+RETURN m.title, m.releaseYear, m.business;
+d.
+MATCH (m:Movie)
+WHERE size((m)-[:RECEIVED_AWARD]->()) > 2
+RETURN m.title, m.releaseYear, m.business;
+MATCH (m:Movie)
+WHERE size((m)-[:RECEIVED_AWARD]->()) > 2
+RETURN m.title, m.releaseYear, m.business;
+Slip 16:
+Q1.
+Q2.
+(:FoodServiceIndustry {name})
+(:Restaurant {name, rating})
+(:Customer {name})
+(:Order {date})
+(:Recommends)
+(:Rate {stars})
+(:Offers)
+Queries
+a.
+MATCH (:Customer)-[:Order {date: '1/1/2023'}]->()
+RETURN COUNT(DISTINCT Customer) AS numberOfCustomers;
+b.
+MATCH (c:Customer)-[:Order]->(:FoodServiceIndustry {name: 'Swiggy'})
+WHERE c.name STARTS WITH 'S'
+RETURN c.name;
+c.
+MATCH (r:Restaurant)
+WHERE r.rating >= 4
+RETURN r.name, r.rating;
+d.
+MATCH (:Restaurant)-[:Recommends]->(c:Customer)-[:Order]->(:FoodServiceIndustry {name: 'ZOMATO'})
+RETURN c.name, COUNT(c) AS recommendations
+ORDER BY recommendations DESC
+LIMIT 1;
+
+
+Slip 17:
+Q1.
+Q2.
+(:Author {name})
+(:Book {title, genre})
+(:Publisher {name})
+(:Reader {name})
+(:Recommends)
+(:Review {rating})
+Queries
+a.
+MATCH (a:Author)-[:Wrote]->(:Book {genre: 'Comics'})
+RETURN DISTINCT a.name;
+b.
+MATCH (:Book {title: 'YourBook'})<-[:Read]-(:Reader)-[:Recommends]->(:Review)-[:PublishedBy]->(:Publisher {name: 'Sage'})
+RETURN COUNT(DISTINCT Reader) AS numberOfReaders;
+c.
+MATCH (p:Publisher)
+WHERE p.name STARTS WITH 'N'
+RETURN p.name;
+d.
+MATCH (:Book {title: 'YourBook'})<-[:Recommends]-(:Review {rating: >=3})<-[:Recommends]-(r:Reader)
+RETURN DISTINCT r.name;
+
+
+
+Slip 18:
+Q1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2D Transformations</title>
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    img {
+      transition: transform 0.5s ease-in-out;
+    }
+
+    /* Rotate the image */
+    .rotate {
+      transform: rotate(45deg);
+    }
+
+    /* Scale the image */
+    .scale {
+      transform: scale(1.5);
+    }
+
+    /* Translate the image */
+    .translate {
+      transform: translate(50px, 50px);
+    }
+  </style>
+</head>
+<body>
+
+  <img src="https://placekitten.com/200/200" alt="Cat Image">
+
+  <!-- Buttons to apply transformations -->
+  <div>
+    <button onclick="applyTransformation('rotate')">Rotate</button>
+    <button onclick="applyTransformation('scale')">Scale</button>
+    <button onclick="applyTransformation('translate')">Translate</button>
+  </div>
+
+  <script>
+    function applyTransformation(transformation) {
+      const img = document.querySelector('img');
+      img.classList.remove('rotate', 'scale', 'translate');
+      img.classList.add(transformation);
+    }
+  </script>
+
+</body>
+</html>
+Q2.
+// Nodes
+CREATE (:Doctor {name: 'Dr. Smith', specialization: 'Orthopedic'})
+CREATE (:Doctor {name: 'Dr. Patel', specialization: 'Pediatric'})
+CREATE (:Doctor {name: 'Dr. Sharma', specialization: 'ENT'})
+CREATE (:Hospital {name: 'City Hospital', area: 'Seren Meadows'})
+CREATE (:Hospital {name: 'Pune Medical Center', area: 'XYZ Area'})
+CREATE (:Person {name: 'John Doe'})
+CREATE (:Review {rating: 5, comment: 'Great experience'})
+
+// Relationships
+MATCH (d:Doctor), (h:Hospital)
+WHERE d.name = 'Dr. Smith' AND h.name = 'City Hospital'
+CREATE (d)-[:VISITS]->(h)
+
+MATCH (d:Doctor), (h:Hospital)
+WHERE d.name = 'Dr. Patel' AND h.name = 'Seren Meadows Hospital'
+CREATE (d)-[:VISITS]->(h)
+
+MATCH (d:Doctor), (h:Hospital)
+WHERE d.name = 'Dr. Sharma' AND h.name = 'Pune Medical Center'
+CREATE (d)-[:VISITS]->(h)
+
+MATCH (d:Doctor), (p:Person)
+WHERE d.name = 'Dr. Patel' AND p.name = 'John Doe'
+CREATE (p)-[:RECOMMENDS]->(d)
+
+MATCH (d:Doctor), (r:Review)
+WHERE d.name = 'Dr. Patel' AND r.rating = 5
+CREATE (d)-[:HAS_REVIEW]->(r)
+Queries:
+a.
+MATCH (d:Doctor {specialization: 'Orthopedic'})-[:VISITS]->(h:Hospital {area: 'XYZ Area'})
+RETURN d.name;
+b.
+MATCH (d:Doctor {specialization: 'ENT'})
+RETURN d.name;
+c.
+MATCH (d:Doctor {specialization: 'Pediatric'})-[:VISITS]->(h:Hospital {area: 'Seren Meadows'})
+RETURN d.name, COUNT(()-[:RECOMMENDS]->(d)) AS recommendations
+ORDER BY recommendations DESC
+LIMIT 1;
+d.
+MATCH (d:Doctor)-[:VISITS]->(h:Hospital)
+WITH d, COUNT(h) AS numberOfHospitals
+WHERE numberOfHospitals > 2
+RETURN d.name;
+
+Slip 19:
+Q1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Download Page</title>
+  <style>
+    #progress-bar {
+      width: 100%;
+      height: 30px;
+      background-color: #e0e0e0;
+      position: relative;
+    }
+
+    #progress {
+      height: 100%;
+      width: 0;
+      background-color: #4caf50;
+      transition: width 0.3s ease-in-out;
+    }
+  </style>
+</head>
+<body>
+
+  <button onclick="startDownload()">Start Download</button>
+  <div id="progress-bar">
+    <div id="progress"></div>
+  </div>
+
+  <script>
+    function startDownload() {
+      let progress = 0;
+      const progressBar = document.getElementById("progress");
+
+      const interval = setInterval(() => {
+        if (progress >= 100) {
+          clearInterval(interval);
+        } else {
+          progress += 10;
+          progressBar.style.width = progress + "%";
+
+          if (progress % 30 === 0) {
+            changeProgressBarColor();
+          }
+        }
+      }, 1000);
+    }
+
+    function changeProgressBarColor() {
+      const progressBar = document.getElementById("progress");
+      const randomColor = getRandomColor();
+      progressBar.style.backgroundColor = randomColor;
+    }
+
+    function getRandomColor() {
+      const letters = "0123456789ABCDEF";
+      let color = "#";
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+  </script>
+
+</body>
+</html>
+Q2.
+Queries:
+// Nodes
+CREATE (:Laptop {name: 'Laptop_A', brand: 'DELL', characteristics: 'Intel Core i7, 16GB RAM, 512GB SSD'})
+CREATE (:Laptop {name: 'Laptop_B', brand: 'HP', characteristics: 'AMD Ryzen 5, 8GB RAM, 256GB SSD'})
+CREATE (:Customer {name: 'John Doe'})
+CREATE (:Customer {name: 'Jane Smith'})
+CREATE (:Purchase {date: '26/01/2023'})
+CREATE (:Review {rating: 5, comment: 'Great laptop!'})
+
+// Relationships
+MATCH (l:Laptop), (c:Customer)
+WHERE l.name = 'Laptop_A' AND c.name = 'John Doe'
+CREATE (c)-[:BOUGHT]->(l)
+
+MATCH (l:Laptop), (c:Customer)
+WHERE l.brand = 'DELL' AND c.name = 'Jane Smith'
+CREATE (c)-[:BOUGHT]->(l)
+
+MATCH (c:Customer), (p:Purchase)
+WHERE c.name = 'John Doe' AND p.date = '26/01/2023'
+CREATE (c)-[:PURCHASED]->(p)
+
+MATCH (l:Laptop), (r:Review)
+WHERE l.name = 'Laptop_A' AND r.rating = 5
+CREATE (l)-[:HAS_REVIEW]->(r)
+a.
+MATCH (l:Laptop {name: 'Laptop_A'})
+RETURN l.characteristics;
+b.
+MATCH (c:Customer)-[:BOUGHT]->(l:Laptop {brand: 'DELL'})
+RETURN c.name;
+c.
+MATCH (c:Customer)-[:PURCHASED]->(p:Purchase {date: '26/01/2023'})
+RETURN c.name;
+
+d.
+MATCH (l:Laptop)-[:HAS_REVIEW]->(r:Review)
+WITH l, COUNT(r) AS recommendations
+RETURN l.name
+ORDER BY recommendations DESC
+LIMIT 1;
+Slip 20:
+Q1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Download Page</title>
+  <style>
+    #progress-bar {
+      width: 100%;
+      height: 30px;
+      background-color: #e0e0e0;
+      position: relative;
+      margin-top: 20px;
+    }
+
+    #progress {
+      height: 100%;
+      width: 0;
+      background-color: #4caf50;
+      transition: width 0.5s ease-in-out;
+    }
+  </style>
+</head>
+<body>
+
+  <button onclick="startDownload()">Start Download</button>
+  <div id="progress-bar">
+    <div id="progress"></div>
+  </div>
+
+  <script>
+    function startDownload() {
+      let progress = 0;
+      const progressBar = document.getElementById("progress");
+
+      const interval = setInterval(() => {
+        if (progress >= 100) {
+          clearInterval(interval);
+          alert("Download completed");
+        } else {
+          progress += 5;
+          progressBar.style.width = progress + "%";
+        }
+      }, 1000);
+    }
+  </script>
+
+</body>
+</html>
+Q2.
+// Nodes
+CREATE (:PlantType {name: 'Flowering'})
+CREATE (:Plant {name: 'Rose', type: 'Flowering', quantity: 600})
+CREATE (:Plant {name: 'Tulip', type: 'Flowering', quantity: 300})
+CREATE (:Plant {name: 'Cactus', type: 'Succulent', quantity: 800})
+CREATE (:Product {name: 'Fertilizer A'})
+CREATE (:Product {name: 'Potting Soil'})
+CREATE (:Supplier {name: 'Supplier_A'})
+CREATE (:Supplier {name: 'Supplier_B'})
+CREATE (:Customer {name: 'John Doe'})
+CREATE (:Purchase {date: '2023-01-15', quantity: 700})
+CREATE (:AppReview {rating: 5, comment: 'Great app!'})
+
+// Relationships
+MATCH (p:Plant), (s:Supplier)
+WHERE p.name = 'Creepers' AND s.name = 'Supplier_B'
+CREATE (s)-[:SUPPLIES]->(p)
+
+MATCH (c:Customer)-[:MADE_PURCHASE]->(pur:Purchase)-[:INCLUDES]->(p:Plant)
+WHERE p.quantity > 500 AND pur.date >= '2023-01-13'
+RETURN c.name, p.name, p.quantity
+ORDER BY pur.date DESC
+
+MATCH (p:Plant)-[:BELONGS_TO]->(pt:PlantType)
+RETURN pt.name;
+
+MATCH (p:Plant)-[:HAS_REVIEW]->(r:AppReview)
+WITH p, AVG(r.rating) AS avgRating
+WHERE avgRating >= 4
+RETURN p.name, avgRating
+ORDER BY avgRating DESC;
+Queries:
+a.
+MATCH (p:Plant)-[:BELONGS_TO]->(pt:PlantType)
+RETURN DISTINCT pt.name;
+b.
+MATCH (p:Plant)-[:BELONGS_TO]->(pt:PlantType {name: 'Flowering'})
+RETURN p.name, p.quantity
+ORDER BY p.quantity DESC;
+c.
+MATCH (c:Customer)-[:MADE_PURCHASE]->(pur:Purchase)-[:INCLUDES]->(p:Plant)
+WHERE p.quantity > 500 AND pur.date >= '2023-01-13'
+RETURN p.name, p.quantity
+ORDER BY pur.date DESC;
+d.
+MATCH (s:Supplier)-[:SUPPLIES]->(p:Plant {name: 'Creepers'})
+RETURN s.name
+ORDER BY s.name DESC;
+
+Slip 21:
+Q1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Registration Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    form {
+      max-width: 400px;
+      margin: 20px auto;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 16px;
+      box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+      background-color: #4caf50;
+      color: white;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+
+    .required {
+      color: red;
+    }
+
+    .message {
+      margin-top: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      background-color: #f5f5f5;
+    }
+  </style>
+</head>
+<body>
+
+  <form>
+    <label for="firstName">First Name <span class="required">*</span></label>
+    <input type="text" id="firstName" name="firstName" required>
+
+    <label for="lastName">Last Name <span class="required">*</span></label>
+    <input type="text" id="lastName" name="lastName" required>
+
+    <label for="email">Email <span class="required">*</span></label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="gender">Gender</label>
+    <select id="gender" name="gender">
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+    </select>
+
+    <input type="submit" value="Submit">
+  </form>
+
+  <div class="message">
+    <p>This is a sample message. You can display validation or success messages here.</p>
+  </div>
+
+</body>
+</html>
+Q2.
+// Nodes
+CREATE (:Brand {name: 'Dr. Reddy'})
+CREATE (:Brand {name: 'Cipla'})
+CREATE (:Brand {name: 'SunPharma'})
+
+CREATE (:State {name: 'Rajasthan'})
+CREATE (:State {name: 'Gujarat'})
+
+CREATE (:Medicine {name: 'Medicine_A'})
+CREATE (:Medicine {name: 'Medicine_B'})
+CREATE (:Medicine {name: 'Medicine_C'})
+
+CREATE (:Product {name: 'Tablet', type: 'Powder'})
+CREATE (:Product {name: 'Syrup', type: 'Liquid'})
+CREATE (:Product {name: 'Powder', type: 'Solid'})
+
+// Relationships
+MATCH (m:Medicine), (b:Brand)
+WHERE m.name = 'Medicine_A' AND b.name = 'Dr. Reddy'
+CREATE (m)-[:MANUFACTURED_BY]->(b)
+
+MATCH (m:Medicine)-[:USED_IN]->(s:State)
+WHERE m.name = 'Medicine_A' AND s.name = 'Rajasthan'
+SET m.usePercentage = 92
+
+MATCH (m:Medicine)-[:AVAILABLE_AS]->(p:Product)
+WHERE m.name = 'Medicine_A' AND p.name = 'Tablet'
+SET p.usePercentage = 95
+
+MATCH (m:Medicine)-[:AVAILABLE_AS]->(p:Product)
+WHERE m.name = 'Medicine_B' AND p.name = 'Powder'
+SET p.usePercentage = 80
+
+MATCH (m:Medicine)-[:MANUFACTURED_BY]->(b:Brand)
+WHERE m.name = 'Medicine_C' AND b.name = 'SunPharma'
+CREATE (m)-[:USED_IN]->(s:State {name: 'Gujarat'})
+SET m.usePercentage = 92
+Queries
+a.
+MATCH (m:Medicine)
+RETURN m.name;
+b.
+MATCH (m:Medicine)-[:USED_IN]->(s:State {name: 'Rajasthan'})
+WHERE m.usePercentage >= 90
+RETURN m.name, m.usePercentage;
+c.
+MATCH (m:Medicine)-[:USED_IN]->(s:State {name: 'Gujarat'})
+MATCH (m)-[:AVAILABLE_AS]->(p:Product {name: 'Tablet'})
+WHERE p.usePercentage >= 90
+RETURN m.name, p.name, p.usePercentage;
+d.
+MATCH (m:Medicine)-[:AVAILABLE_AS]->(p:Product {name: 'Powder'})
+RETURN m.name, p.name;
+
+Slip 22:
+Q1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Text Effects</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .text-container {
+      text-align: center;
+      color: #333;
+      font-size: 2em;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: bold;
+      text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      width: 300px;
+    }
+
+    .overflow-hidden {
+      overflow: hidden;
+    }
+
+    .word-wrap {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="text-container">
+    <div class="overflow-hidden">This is 3D Text with Overflow Hidden</div>
+    <div class="word-wrap">This is 3D Text with Word Wrap and Text Overflow Ellipsis</div>
+  </div>
+
+</body>
+</html>
+Q2.
+// Nodes
+CREATE (:CarModel {name: 'Honda City'})
+CREATE (:CarModel {name: 'Skoda'})
+CREATE (:CarModel {name: 'Creta'})
+CREATE (:CarModel {name: 'Swift'})
+CREATE (:CarModel {name: 'Ertiga'})
+
+CREATE (:ShowroomSection {name: 'Honda City Section'})
+CREATE (:ShowroomSection {name: 'Skoda Section'})
+CREATE (:ShowroomSection {name: 'Creta Section'})
+CREATE (:ShowroomSection {name: 'Swift Section'})
+CREATE (:ShowroomSection {name: 'Ertiga Section'})
+
+CREATE (:SalesStaff {name: 'Mr. Narayan'})
+CREATE (:SalesStaff {name: 'Mr. Kumar'})
+CREATE (:SalesStaff {name: 'Mr. Singh'})
+
+CREATE (:Customer {name: 'John Doe'})
+CREATE (:Customer {name: 'Jane Smith'})
+CREATE (:Customer {name: 'Bob Johnson'})
+
+// Relationships
+MATCH (c:CarModel), (s:ShowroomSection)
+WHERE c.name = 'Honda City' AND s.name = 'Honda City Section'
+CREATE (c)-[:DISPLAYED_IN]->(s)
+
+MATCH (c:CarModel), (s:ShowroomSection)
+WHERE c.name = 'Skoda' AND s.name = 'Skoda Section'
+CREATE (c)-[:DISPLAYED_IN]->(s)
+
+MATCH (c:CarModel), (s:ShowroomSection)
+WHERE c.name = 'Creta' AND s.name = 'Creta Section'
+CREATE (c)-[:DISPLAYED_IN]->(s)
+
+MATCH (c:CarModel), (s:ShowroomSection)
+WHERE c.name = 'Swift' AND s.name = 'Swift Section'
+CREATE (c)-[:DISPLAYED_IN]->(s)
+
+MATCH (c:CarModel), (s:ShowroomSection)
+WHERE c.name = 'Ertiga' AND s.name = 'Ertiga Section'
+CREATE (c)-[:DISPLAYED_IN]->(s)
+
+MATCH (ss:SalesStaff), (s:ShowroomSection)
+WHERE ss.name = 'Mr. Narayan' AND s.name = 'Honda City Section'
+CREATE (ss)-[:HANDLES]->(s)
+
+MATCH (ss:SalesStaff), (s:ShowroomSection)
+WHERE ss.name = 'Mr. Kumar' AND s.name = 'Skoda Section'
+CREATE (ss)-[:HANDLES]->(s)
+
+MATCH (ss:SalesStaff), (s:ShowroomSection)
+WHERE ss.name = 'Mr. Singh' AND s.name IN ['Creta Section', 'Swift Section', 'Ertiga Section']
+CREATE (ss)-[:HANDLES]->(s)
+
+MATCH (c:Customer), (s:ShowroomSection)
+WHERE c.name = 'John Doe' AND s.name = 'Honda City Section'
+CREATE (c)-[:ENQUIRY]->(s)
+
+MATCH (c:Customer), (s:ShowroomSection)
+WHERE c.name = 'Jane Smith' AND s.name = 'Creta Section'
+CREATE (c)-[:PURCHASE]->(s)
+
+MATCH (c:Customer), (s:ShowroomSection)
+WHERE c.name = 'Bob Johnson' AND s.name = 'Swift Section'
+CREATE (c)-[:ENQUIRY]->(s)
+Queries
+a.
+MATCH (c:CarModel)
+RETURN c.name;
+b.
+MATCH (ss:SalesStaff {name: 'Mr. Narayan'})-[:HANDLES]->(s:ShowroomSection)
+RETURN s.name;
+c.
+MATCH (c:Customer)-[:ENQUIRY]->(s:ShowroomSection)
+WHERE NOT (c)-[:PURCHASE]->(s)
+RETURN c.name;
+d.
+MATCH (c:CarModel)<-[:PURCHASE]-(cust:Customer)
+RETURN c.name, COUNT(cust) AS salesCount
+ORDER BY salesCount DESC
+LIMIT 1;
+
+
+Slip 23:
+Q1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Viewer</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    img {
+      max-width: 100%;
+      max-height: 80vh;
+      margin: 20px;
+      transition: transform 0.5s ease;
+    }
+
+    button {
+      margin: 10px;
+      padding: 10px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <img id="displayImage" src="path/to/your/image.jpg" alt="Image">
+  
+  <div>
+    <button onclick="displayInTiles()">Display in Tiles</button>
+    <button onclick="rotateClockwise()">Rotate Clockwise</button>
+    <button onclick="rotateAntiClockwise()">Rotate Anti-clockwise</button>
+  </div>
+
+  <script>
+    let rotationAngle = 0;
+
+    function displayInTiles() {
+      const imgElement = document.getElementById('displayImage');
+      imgElement.style.objectFit = 'cover';
+    }
+
+    function rotateClockwise() {
+      rotationAngle += 90;
+      applyRotation();
+    }
+
+    function rotateAntiClockwise() {
+      rotationAngle -= 90;
+      applyRotation();
+    }
+
+    function applyRotation() {
+      const imgElement = document.getElementById('displayImage');
+      imgElement.style.transform = `rotate(${rotationAngle}deg)`;
+    }
+  </script>
+
+</body>
+</html>
+Q2.
+// Nodes
+CREATE (:VehicleType {name: 'Two-Wheeler', characteristics: '...'})
+CREATE (:VehicleType {name: 'Four-Wheeler', characteristics: '...'})
+CREATE (:VehicleType {name: 'SUV', characteristics: '...'})
+CREATE (:VehicleType {name: 'Electric Vehicle', characteristics: '...'})
+
+CREATE (:Customer {name: 'John Doe'})
+CREATE (:Customer {name: 'Jane Smith'})
+CREATE (:Customer {name: 'Bob Johnson'})
+
+CREATE (:Recommendation {rating: 5, comments: 'Great vehicle!'})
+
+// Relationships
+MATCH (c:Customer), (vt:VehicleType)
+WHERE c.name = 'John Doe' AND vt.name = 'Two-Wheeler'
+CREATE (c)-[:BOUGHT]->(vt)
+
+MATCH (c:Customer), (vt:VehicleType)
+WHERE c.name = 'Jane Smith' AND vt.name = 'Four-Wheeler'
+CREATE (c)-[:BOUGHT]->(vt)
+
+MATCH (c:Customer), (vt:VehicleType)
+WHERE c.name = 'Bob Johnson' AND vt.name IN ['Two-Wheeler', 'Electric Vehicle']
+CREATE (c)-[:BOUGHT]->(vt)
+
+MATCH (vt:VehicleType)<-[:RECOMMENDS]-(r:Recommendation)
+RETURN vt.name, AVG(r.rating) AS avgRating
+ORDER BY avgRating DESC
+LIMIT 1;
+Queries
+a.
+MATCH (vt:VehicleType {name: 'Four-Wheeler'})
+RETURN vt.characteristics;
+b.
+MATCH (c:Customer)-[:BOUGHT]->(vt:VehicleType {name: 'Two-Wheeler'})
+RETURN c.name;
+c.
+MATCH (c:Customer)-[:BOUGHT]->(vt:VehicleType)
+WITH c, COUNT(DISTINCT vt) AS numVehicleTypes
+WHERE numVehicleTypes > 1
+RETURN c.name;
+d.
+MATCH (vt:VehicleType)<-[:RECOMMENDS]-(r:Recommendation)
+RETURN vt.name, AVG(r.rating) AS avgRating
+ORDER BY avgRating DESC
+LIMIT 1;
+
+
+
+Slip 24:
+Q1.
+Q2.
+// Nodes
+CREATE (:BookType {name: 'Text'})
+CREATE (:BookType {name: 'Reference'})
+CREATE (:BookType {name: 'Bibliography'})
+CREATE (:BookType {name: 'Fiction'})
+
+CREATE (:Student {name: 'Alice'})
+CREATE (:Student {name: 'Bob'})
+CREATE (:Student {name: 'Charlie'})
+
+CREATE (:Recommendation {rating: 4, comments: 'Great book!'})
+
+// Relationships
+MATCH (s:Student), (bt:BookType)
+WHERE s.name = 'Alice' AND bt.name IN ['Text', 'Reference']
+CREATE (s)-[:BOUGHT]->(bt)
+
+MATCH (s:Student), (bt:BookType)
+WHERE s.name = 'Bob' AND bt.name = 'Text'
+CREATE (s)-[:BOUGHT]->(bt)
+
+MATCH (s:Student), (bt:BookType)
+WHERE s.name = 'Charlie' AND bt.name = 'Fiction'
+CREATE (s)-[:BOUGHT]->(bt)
+
+MATCH (bt:BookType)<-[:RECOMMENDS]-(r:Recommendation)
+RETURN bt.name, AVG(r.rating) AS avgRating
+ORDER BY avgRating DESC
+LIMIT 1;
+Queries
+a.
+MATCH (bt:BookType {name: 'Text'})
+RETURN bt;
+b.
+MATCH (s:Student)-[:BOUGHT]->(bt:BookType)
+WHERE bt.name IN ['Text', 'Reference']
+RETURN s.name;
+c.
+MATCH (bt:BookType)<-[:RECOMMENDS]-(r:Recommendation)
+RETURN bt.name, AVG(r.rating) AS avgRating
+ORDER BY avgRating DESC
+LIMIT 1;
+d.
+MATCH (s:Student)-[:BOUGHT]->(bt:BookType)
+WITH s, COUNT(DISTINCT bt) AS numBookTypes
+WHERE numBookTypes > 1
+RETURN s.name;
+
+
+
+
+
+Slip 25:
+Q1.
+Q2.
+// Nodes
+CREATE (:Department {name: 'Physics'})
+CREATE (:Department {name: 'Geography'})
+CREATE (:Department {name: 'Computer'})
+CREATE (:Department {name: 'Mathematics'})
+
+CREATE (:Course {name: 'Introduction to Physics'})
+CREATE (:Course {name: 'Geography 101'})
+CREATE (:Course {name: 'Computer Science Basics'})
+CREATE (:Course {name: 'Calculus'})
+
+CREATE (:Recommendation {rating: 5, comments: 'Highly recommended!'})
+
+// Relationships
+MATCH (d:Department), (c:Course)
+WHERE d.name = 'Physics' AND c.name IN ['Introduction to Physics']
+CREATE (d)-[:OFFERS]->(c)
+
+MATCH (d:Department), (c:Course)
+WHERE d.name = 'Geography' AND c.name IN ['Geography 101']
+CREATE (d)-[:OFFERS]->(c)
+
+MATCH (d:Department), (c:Course)
+WHERE d.name = 'Computer' AND c.name IN ['Computer Science Basics']
+CREATE (d)-[:OFFERS]->(c)
+
+MATCH (d:Department), (c:Course)
+WHERE d.name = 'Mathematics' AND c.name IN ['Calculus']
+CREATE (d)-[:OFFERS]->(c)
+
+MATCH (c:Course)<-[:RECOMMENDS]-(r:Recommendation)
+RETURN c.name, AVG(r.rating) AS avgRating
+ORDER BY avgRating DESC
+LIMIT 1;
+Queries
+a.
+MATCH (d:Department)
+RETURN d;
+b.
+MATCH (d:Department {name: 'Physics'})-[:OFFERS]->(c:Course)
+RETURN c.name;
+c.
+MATCH (d:Department {name: 'Geography'})-[:OFFERS]->(c:Course)<-[:RECOMMENDS]-(r:Recommendation)
+RETURN c.name, AVG(r.rating) AS avgRating
+ORDER BY avgRating DESC
+LIMIT 1;
+d.
+MATCH (math:Department {name: 'Mathematics'})-[:OFFERS]->(mathCourse:Course),
+      (comp:Department {name: 'Computer'})-[:OFFERS]->(compCourse:Course)
+WHERE mathCourse.name = compCourse.name
+RETURN mathCourse.name;
